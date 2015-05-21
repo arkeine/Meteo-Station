@@ -1,15 +1,18 @@
 
-package ch.hearc.meteo.imp.afficheur.real.vue;
+package ch.hearc.meteo.imp.afficheur.real.vue.panel;
 
 import java.awt.BorderLayout;
 
 import javax.swing.Box;
 import javax.swing.JPanel;
 
-import ch.hearc.meteo.imp.afficheur.simulateur.moo.AfficheurServiceMOO;
+import ch.hearc.meteo.imp.afficheur.real.controller.DataController;
+import ch.hearc.meteo.imp.afficheur.real.vue.infostat.JPanelControl;
+import ch.hearc.meteo.imp.afficheur.real.vue.infostat.JPanelData;
+import ch.hearc.meteo.imp.afficheur.real.vue.infostat.JPanelSlider;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 
-public class JPanelRoot extends JPanel
+public class JPanelInfoStation extends JPanel
 	{
 
 
@@ -17,11 +20,11 @@ public class JPanelRoot extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelRoot(AfficheurServiceMOO afficheurServiceMOO)
+	public JPanelInfoStation(DataController dataController)
 		{
-		this.panelControl = new JPanelControl(afficheurServiceMOO);
-		this.panelData = new JPanelData(afficheurServiceMOO);
-		this.panelSlider=new JPanelSlider(afficheurServiceMOO);
+		this.panelControl = new JPanelControl(dataController);
+		this.panelData = new JPanelData(dataController);
+		this.panelSlider=new JPanelSlider(dataController);
 
 		geometry();
 		control();
@@ -50,9 +53,7 @@ public class JPanelRoot extends JPanel
 	private void geometry()
 		{
 		Box boxV = Box.createVerticalBox();
-		//boxV.add(Box.createVerticalStrut(15));
 		boxV.add(panelData);
-		//boxV.add(Box.createVerticalStrut(15));
 		boxV.add(panelSlider);
 		boxV.add(panelControl);
 		boxV.add(Box.createVerticalStrut(15));

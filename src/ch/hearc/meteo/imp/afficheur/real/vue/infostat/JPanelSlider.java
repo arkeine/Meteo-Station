@@ -1,5 +1,5 @@
 
-package ch.hearc.meteo.imp.afficheur.real.vue;
+package ch.hearc.meteo.imp.afficheur.real.vue.infostat;
 
 import java.awt.FlowLayout;
 import java.rmi.RemoteException;
@@ -12,7 +12,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import ch.hearc.meteo.imp.afficheur.simulateur.moo.AfficheurServiceMOO;
+import ch.hearc.meteo.imp.afficheur.real.controller.DataController;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 
 public class JPanelSlider extends JPanel
@@ -22,9 +22,9 @@ public class JPanelSlider extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelSlider(AfficheurServiceMOO afficheurServiceMOO)
+	public JPanelSlider(DataController dataController)
 		{
-		this.afficheurServiceMOO = afficheurServiceMOO;
+		this.dataController = dataController;
 
 		geometry();
 		apparence();
@@ -53,7 +53,7 @@ public class JPanelSlider extends JPanel
 		int value;
 		try
 			{
-			value = (int)afficheurServiceMOO.getMeteoServiceOptions().getTemperatureDT();
+			value = (int)dataController.getMeteoServiceOptions().getTemperatureDT();
 			}
 		catch (RemoteException e)
 			{
@@ -89,11 +89,11 @@ public class JPanelSlider extends JPanel
 
 					try
 						{
-						MeteoServiceOptions meteoServiceOption = new MeteoServiceOptions(afficheurServiceMOO.getMeteoServiceOptions());
+						MeteoServiceOptions meteoServiceOption = new MeteoServiceOptions(dataController.getMeteoServiceOptions());
 						meteoServiceOption.setTemperatureDT(value);
 
 						setTitleBorder(value);
-						afficheurServiceMOO.setMeteoServiceOptions(meteoServiceOption);
+						dataController.setMeteoServiceOptions(meteoServiceOption);
 						}
 					catch (RemoteException e1)
 						{
@@ -115,7 +115,7 @@ public class JPanelSlider extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	private AfficheurServiceMOO afficheurServiceMOO;
+	private DataController dataController;
 
 	// Tools
 	private JSlider jslider;

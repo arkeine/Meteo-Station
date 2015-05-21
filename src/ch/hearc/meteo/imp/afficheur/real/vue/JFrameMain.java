@@ -3,20 +3,21 @@ package ch.hearc.meteo.imp.afficheur.real.vue;
 
 import javax.swing.JFrame;
 
-import ch.hearc.meteo.imp.afficheur.simulateur.moo.AfficheurServiceMOO;
+import ch.hearc.meteo.imp.afficheur.real.controller.DataController;
+import ch.hearc.meteo.imp.afficheur.real.vue.panel.JPanelInfoStation;
+import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
+import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
 
-public class JFrameAfficheurService extends JFrame
+public class JFrameMain extends JFrame implements AfficheurService_I
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JFrameAfficheurService(AfficheurServiceMOO afficheurServiceMOO)
+	public JFrameMain()
 		{
-		this.afficheurServiceMOO = afficheurServiceMOO;
-
 		geometry();
 		control();
 		apparence();
@@ -26,14 +27,30 @@ public class JFrameAfficheurService extends JFrame
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public void refresh()
+	@Override
+	public void printPression(MeteoEvent event)
 		{
-		panelRoot.update();
+		// TODO Auto-generated method stub
+
+		}
+
+	@Override
+	public void printAltitude(MeteoEvent event)
+		{
+		// TODO Auto-generated method stub
+
+		}
+
+	@Override
+	public void printTemperature(MeteoEvent event)
+		{
+		// TODO Auto-generated method stub
+
 		}
 
 	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
 		{
-		panelRoot.updateMeteoServiceOptions( meteoServiceOptions);
+		panelRootStat.updateMeteoServiceOptions( meteoServiceOptions);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -42,8 +59,8 @@ public class JFrameAfficheurService extends JFrame
 
 	private void geometry()
 		{
-		panelRoot = new JPanelRoot(afficheurServiceMOO);
-		add(panelRoot);
+		panelRootStat = new JPanelInfoStation(dataController);
+		add(panelRootStat);
 		}
 
 	private void control()
@@ -53,7 +70,7 @@ public class JFrameAfficheurService extends JFrame
 
 	private void apparence()
 		{
-		setTitle(afficheurServiceMOO.getTitre());
+		setTitle(dataController.getTitre());
 
 		setSize(500, 550);
 		setResizable(false);
@@ -66,9 +83,9 @@ public class JFrameAfficheurService extends JFrame
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	private AfficheurServiceMOO afficheurServiceMOO;
+	private DataController dataController;
 
 	// Tools
-	private JPanelRoot panelRoot;
+	private JPanelInfoStation panelRootStat;
 
 	}
