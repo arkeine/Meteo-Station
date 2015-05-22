@@ -11,14 +11,14 @@ import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEventType_E;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
-public class AfficheurServiceMOO
+public class Station
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public AfficheurServiceMOO(AffichageOptions affichageOptions, MeteoServiceWrapper_I meteoServiceRemote)
+	public Station(AffichageOptions affichageOptions, MeteoServiceWrapper_I meteoServiceRemote)
 		{
 		// Inputs
 		this.affichageOptions = affichageOptions;

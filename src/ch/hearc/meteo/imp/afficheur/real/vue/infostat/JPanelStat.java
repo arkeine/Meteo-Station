@@ -10,8 +10,8 @@ import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ch.hearc.meteo.imp.afficheur.real.data.Stat;
 import ch.hearc.meteo.imp.afficheur.real.tools.MathTools;
-import ch.hearc.meteo.imp.afficheur.simulateur.moo.Stat;
 
 public class JPanelStat extends JPanel
 	{

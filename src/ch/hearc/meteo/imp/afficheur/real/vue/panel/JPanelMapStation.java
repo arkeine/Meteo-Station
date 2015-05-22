@@ -6,7 +6,7 @@ import java.awt.BorderLayout;
 import javax.swing.Box;
 import javax.swing.JPanel;
 
-import ch.hearc.meteo.imp.afficheur.real.controller.DataController;
+import ch.hearc.meteo.imp.afficheur.real.data.Station;
 import ch.hearc.meteo.imp.afficheur.real.vue.infostat.JPanelControl;
 import ch.hearc.meteo.imp.afficheur.real.vue.infostat.JPanelData;
 import ch.hearc.meteo.imp.afficheur.real.vue.infostat.JPanelSlider;
@@ -20,11 +20,11 @@ public class JPanelMapStation extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelMapStation(DataController dataController)
+	public JPanelMapStation(Station station)
 		{
-		this.panelControl = new JPanelControl(dataController);
-		this.panelData = new JPanelData(dataController);
-		this.panelSlider=new JPanelSlider(dataController);
+		this.panelControl = new JPanelControl(station);
+		this.panelData = new JPanelData(station);
+		this.panelSlider=new JPanelSlider(station);
 
 		geometry();
 		control();

@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import ch.hearc.meteo.imp.afficheur.simulateur.moo.Stat;
 
+
 public class JPanelStat extends JPanel
 	{
 

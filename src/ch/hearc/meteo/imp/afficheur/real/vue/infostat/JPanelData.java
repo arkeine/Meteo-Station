@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.Box;
 
-import ch.hearc.meteo.imp.afficheur.real.controller.DataController;
+import ch.hearc.meteo.imp.afficheur.real.data.Station;
 import ch.hearc.meteo.imp.afficheur.real.vue.panel.JPanelMain;
 
 public class JPanelData extends JPanelMain
@@ -15,9 +15,9 @@ public class JPanelData extends JPanelMain
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelData(DataController dataController)
+	public JPanelData(Station station)
 		{
-		super(dataController);
+		super(station);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -39,9 +39,9 @@ public class JPanelData extends JPanelMain
 	protected void init()
 		{
 		// Tools
-		this.pannelPression = new JPanelEvent(dataController.getStatPression(), dataController.getListPression(), "Pression");
-		this.pannelAltitude = new JPanelEvent(dataController.getStatAltitude(), dataController.getListAltitude(), "Altitude");
-		this.pannelTemperature = new JPanelEvent(dataController.getStatTemperature(), dataController.getListTemperature(), "Temperature");
+		this.pannelPression = new JPanelEvent(station.getStatPression(), station.getListPression(), "Pression");
+		this.pannelAltitude = new JPanelEvent(station.getStatAltitude(), station.getListAltitude(), "Altitude");
+		this.pannelTemperature = new JPanelEvent(station.getStatTemperature(), station.getListTemperature(), "Temperature");
 		}
 
 	@Override

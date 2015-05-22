@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
-import ch.hearc.meteo.imp.afficheur.real.controller.DataController;
+import ch.hearc.meteo.imp.afficheur.real.data.Station;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
@@ -22,10 +22,10 @@ public class JPanelControl extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelControl(DataController dataController)
+	public JPanelControl(Station station)
 		{
-		this.dataController = dataController;
-		this.meteoServiceRemote = dataController.getMeteoServiceRemote();
+		this.station = station;
+		this.meteoServiceRemote = station.getMeteoServiceRemote();
 
 		geometry();
 		control();
@@ -117,7 +117,7 @@ public class JPanelControl extends JPanel
 
 				@Override public void actionPerformed(ActionEvent e)
 					{
-					dataController.setPause(!dataController.isPause());
+					station.setPause(!station.isPause());
 					}
 			});
 
@@ -190,7 +190,7 @@ public class JPanelControl extends JPanel
 
 	// Input
 	private MeteoServiceWrapper_I meteoServiceRemote;
-	private DataController dataController;
+	private Station station;
 
 	// Tools
 	private JButton boutonStart;

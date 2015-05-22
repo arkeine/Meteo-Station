@@ -6,7 +6,6 @@ import java.awt.BorderLayout;
 import javax.swing.Box;
 import javax.swing.JPanel;
 
-import ch.hearc.meteo.imp.afficheur.real.vue.infostat.JPanelEvent;
 import ch.hearc.meteo.imp.afficheur.simulateur.moo.AfficheurServiceMOO;
 
 public class JPanelData extends JPanel

@@ -3,7 +3,7 @@ package ch.hearc.meteo.imp.afficheur.real.vue.panel;
 
 import javax.swing.JPanel;
 
-import ch.hearc.meteo.imp.afficheur.real.controller.DataController;
+import ch.hearc.meteo.imp.afficheur.real.data.Station;
 
 public abstract class JPanelMain extends JPanel
 	{
@@ -13,9 +13,9 @@ public abstract class JPanelMain extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelMain(DataController dataController)
+	public JPanelMain(Station station)
 		{
-		this.dataController = dataController;
+		this.station = station;
 
 		init();
 		geometry();
@@ -42,6 +42,6 @@ public abstract class JPanelMain extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Tools
-	protected DataController dataController;
+	protected Station station;
 
 	}

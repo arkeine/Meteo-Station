@@ -2,14 +2,13 @@
 package ch.hearc.meteo.imp.afficheur.real.vue;
 
 import javax.swing.JFrame;
+import javax.swing.JMenuBar;
 
 import ch.hearc.meteo.imp.afficheur.real.controller.DataController;
-import ch.hearc.meteo.imp.afficheur.real.vue.panel.JPanelInfoStation;
-import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
-import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
-import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
+import ch.hearc.meteo.imp.afficheur.real.controller.PageController;
+import ch.hearc.meteo.imp.afficheur.real.vue.panel.JPanelMain;
 
-public class JFrameMain extends JFrame implements AfficheurService_I
+public class JFrameMain extends JFrame
 	{
 
 	/*------------------------------------------------------------------*\
@@ -27,31 +26,13 @@ public class JFrameMain extends JFrame implements AfficheurService_I
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	@Override
-	public void printPression(MeteoEvent event)
-		{
-		// TODO Auto-generated method stub
+	/*------------------------------*\
+	|*				Set				*|
+	\*------------------------------*/
 
-		}
-
-	@Override
-	public void printAltitude(MeteoEvent event)
-		{
-		// TODO Auto-generated method stub
-
-		}
-
-	@Override
-	public void printTemperature(MeteoEvent event)
-		{
-		// TODO Auto-generated method stub
-
-		}
-
-	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
-		{
-		panelRootStat.updateMeteoServiceOptions( meteoServiceOptions);
-		}
+	public void addMenu(JPanelMain jPanelMain) {
+		menuBar.add(jPanelMain);
+	}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
@@ -59,8 +40,8 @@ public class JFrameMain extends JFrame implements AfficheurService_I
 
 	private void geometry()
 		{
-		panelRootStat = new JPanelInfoStation(dataController);
-		add(panelRootStat);
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
 		}
 
 	private void control()
@@ -70,7 +51,7 @@ public class JFrameMain extends JFrame implements AfficheurService_I
 
 	private void apparence()
 		{
-		setTitle(dataController.getTitre());
+		setTitle("Station Météo");
 
 		setSize(500, 550);
 		setResizable(false);
@@ -84,8 +65,9 @@ public class JFrameMain extends JFrame implements AfficheurService_I
 
 	// Inputs
 	private DataController dataController;
+	private PageController pagecontroller;
 
 	// Tools
-	private JPanelInfoStation panelRootStat;
+	private JMenuBar menuBar;
 
 	}
