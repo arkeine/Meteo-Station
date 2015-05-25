@@ -1,5 +1,5 @@
 
-package ch.hearc.meteo.imp.afficheur.real.vue;
+package ch.hearc.meteo.imp.afficheur.real.vue.infostat;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -9,9 +9,8 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JPanel;
 
-import ch.hearc.meteo.imp.afficheur.simulateur.moo.Stat;
+import ch.hearc.meteo.imp.afficheur.real.data.Stat;
 import ch.hearc.meteo.imp.afficheur.simulateur.vue.atome.BoxSerieTemporelle;
-import ch.hearc.meteo.imp.afficheur.simulateur.vue.atome.JPanelStat;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
 
 public class JPanelEvent extends JPanel

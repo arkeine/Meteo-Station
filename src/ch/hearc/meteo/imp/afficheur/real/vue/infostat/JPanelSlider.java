@@ -1,5 +1,5 @@
 
-package ch.hearc.meteo.imp.afficheur.real.vue;
+package ch.hearc.meteo.imp.afficheur.real.vue.infostat;
 
 import java.awt.FlowLayout;
 import java.rmi.RemoteException;
@@ -12,7 +12,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import ch.hearc.meteo.imp.afficheur.simulateur.moo.AfficheurServiceMOO;
+import ch.hearc.meteo.imp.afficheur.real.data.Station;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 
 public class JPanelSlider extends JPanel
@@ -22,9 +22,9 @@ public class JPanelSlider extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelSlider(AfficheurServiceMOO afficheurServiceMOO)
+	public JPanelSlider(Station station)
 		{
-		this.afficheurServiceMOO = afficheurServiceMOO;
+		this.station = station;
 
 		geometry();
 		apparence();
@@ -53,7 +53,7 @@ public class JPanelSlider extends JPanel
 		int value;
 		try
 			{
-			value = (int)afficheurServiceMOO.getMeteoServiceOptions().getTemperatureDT();
+			value = (int)station.getMeteoServiceOptions().getTemperatureDT();
 			}
 		catch (RemoteException e)
 			{
@@ -89,11 +89,11 @@ public class JPanelSlider extends JPanel
 
 					try
 						{
-						MeteoServiceOptions meteoServiceOption = new MeteoServiceOptions(afficheurServiceMOO.getMeteoServiceOptions());
+						MeteoServiceOptions meteoServiceOption = new MeteoServiceOptions(station.getMeteoServiceOptions());
 						meteoServiceOption.setTemperatureDT(value);
 
 						setTitleBorder(value);
-						afficheurServiceMOO.setMeteoServiceOptions(meteoServiceOption);
+						station.setMeteoServiceOptions(meteoServiceOption);
 						}
 					catch (RemoteException e1)
 						{
@@ -115,7 +115,7 @@ public class JPanelSlider extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	private AfficheurServiceMOO afficheurServiceMOO;
+	private Station station;
 
 	// Tools
 	private JSlider jslider;

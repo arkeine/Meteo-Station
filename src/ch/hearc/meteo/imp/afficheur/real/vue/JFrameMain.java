@@ -2,21 +2,21 @@
 package ch.hearc.meteo.imp.afficheur.real.vue;
 
 import javax.swing.JFrame;
+import javax.swing.JMenuBar;
 
-import ch.hearc.meteo.imp.afficheur.simulateur.moo.AfficheurServiceMOO;
-import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
+import ch.hearc.meteo.imp.afficheur.real.controller.DataController;
+import ch.hearc.meteo.imp.afficheur.real.controller.PageController;
+import ch.hearc.meteo.imp.afficheur.real.vue.panel.JPanelMain;
 
-public class JFrameAfficheurService extends JFrame
+public class JFrameMain extends JFrame
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JFrameAfficheurService(AfficheurServiceMOO afficheurServiceMOO)
+	public JFrameMain()
 		{
-		this.afficheurServiceMOO = afficheurServiceMOO;
-
 		geometry();
 		control();
 		apparence();
@@ -26,15 +26,13 @@ public class JFrameAfficheurService extends JFrame
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public void refresh()
-		{
-		panelRoot.update();
-		}
+	/*------------------------------*\
+	|*				Set				*|
+	\*------------------------------*/
 
-	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
-		{
-		panelRoot.updateMeteoServiceOptions( meteoServiceOptions);
-		}
+	public void addMenu(JPanelMain jPanelMain) {
+		menuBar.add(jPanelMain);
+	}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
@@ -42,8 +40,8 @@ public class JFrameAfficheurService extends JFrame
 
 	private void geometry()
 		{
-		panelRoot = new JPanelRoot(afficheurServiceMOO);
-		add(panelRoot);
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
 		}
 
 	private void control()
@@ -53,7 +51,7 @@ public class JFrameAfficheurService extends JFrame
 
 	private void apparence()
 		{
-		setTitle(afficheurServiceMOO.getTitre());
+		setTitle("Station Météo");
 
 		setSize(500, 550);
 		setResizable(false);
@@ -66,9 +64,10 @@ public class JFrameAfficheurService extends JFrame
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	private AfficheurServiceMOO afficheurServiceMOO;
+	private DataController dataController;
+	private PageController pagecontroller;
 
 	// Tools
-	private JPanelRoot panelRoot;
+	private JMenuBar menuBar;
 
 	}

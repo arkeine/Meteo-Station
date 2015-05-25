@@ -1,31 +1,26 @@
 
-package ch.hearc.meteo.imp.afficheur.real.vue;
+package ch.hearc.meteo.imp.afficheur.real.vue.panel;
 
 import java.awt.BorderLayout;
 
 import javax.swing.Box;
-import javax.swing.JPanel;
 
-import ch.hearc.meteo.imp.afficheur.simulateur.moo.AfficheurServiceMOO;
+import ch.hearc.meteo.imp.afficheur.real.data.Station;
+import ch.hearc.meteo.imp.afficheur.real.vue.infostat.JPanelControl;
+import ch.hearc.meteo.imp.afficheur.real.vue.infostat.JPanelData;
+import ch.hearc.meteo.imp.afficheur.real.vue.infostat.JPanelSlider;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 
-public class JPanelRoot extends JPanel
+public class JPanelInfoStation extends JPanelMain
 	{
-
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelRoot(AfficheurServiceMOO afficheurServiceMOO)
+	public JPanelInfoStation(Station station)
 		{
-		this.panelControl = new JPanelControl(afficheurServiceMOO);
-		this.panelData = new JPanelData(afficheurServiceMOO);
-		this.panelSlider=new JPanelSlider(afficheurServiceMOO);
-
-		geometry();
-		control();
-		apparence();
+		super(station);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -37,22 +32,28 @@ public class JPanelRoot extends JPanel
 		panelData.update();
 		}
 
-
 	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
 		{
-		panelSlider.updateMeteoServiceOptions( meteoServiceOptions);
+		panelSlider.updateMeteoServiceOptions(meteoServiceOptions);
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
-	private void geometry()
+	@Override
+	protected void init()
+		{
+		this.panelControl = new JPanelControl(station);
+		this.panelData = new JPanelData(station);
+		this.panelSlider = new JPanelSlider(station);
+		}
+
+	@Override
+	protected void geometry()
 		{
 		Box boxV = Box.createVerticalBox();
-		//boxV.add(Box.createVerticalStrut(15));
 		boxV.add(panelData);
-		//boxV.add(Box.createVerticalStrut(15));
 		boxV.add(panelSlider);
 		boxV.add(panelControl);
 		boxV.add(Box.createVerticalStrut(15));
@@ -62,18 +63,19 @@ public class JPanelRoot extends JPanel
 		boxH.add(boxV);
 		boxH.add(Box.createHorizontalStrut(15));
 
-
 		setLayout(new BorderLayout());
 		add(boxH, BorderLayout.CENTER);
 		}
 
-	private void apparence()
+	@Override
+	protected void apparence()
 		{
 		// rien
 		//setBackground(Color.ORANGE);
 		}
 
-	private void control()
+	@Override
+	protected void control()
 		{
 		// rien
 		}

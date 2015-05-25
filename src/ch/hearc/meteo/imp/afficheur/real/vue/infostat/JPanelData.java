@@ -1,33 +1,23 @@
 
-package ch.hearc.meteo.imp.afficheur.real.vue;
+package ch.hearc.meteo.imp.afficheur.real.vue.infostat;
 
 import java.awt.BorderLayout;
 
 import javax.swing.Box;
-import javax.swing.JPanel;
 
-import ch.hearc.meteo.imp.afficheur.simulateur.moo.AfficheurServiceMOO;
+import ch.hearc.meteo.imp.afficheur.real.data.Station;
+import ch.hearc.meteo.imp.afficheur.real.vue.panel.JPanelMain;
 
-public class JPanelData extends JPanel
+public class JPanelData extends JPanelMain
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelData(AfficheurServiceMOO afficheurServiceMOO)
+	public JPanelData(Station station)
 		{
-		// Inputs
-		this.afficheurServiceMOO = afficheurServiceMOO;
-
-		// Tools
-		this.pannelPression = new JPanelEvent(afficheurServiceMOO.getStatPression(), afficheurServiceMOO.getListPression(), "Pression");
-		this.pannelAltitude = new JPanelEvent(afficheurServiceMOO.getStatAltitude(), afficheurServiceMOO.getListAltitude(), "Altitude");
-		this.pannelTemperature = new JPanelEvent(afficheurServiceMOO.getStatTemperature(), afficheurServiceMOO.getListTemperature(), "Temperature");
-
-		geometry();
-		control();
-		apparence();
+		super(station);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -45,7 +35,17 @@ public class JPanelData extends JPanel
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
-	private void geometry()
+	@Override
+	protected void init()
+		{
+		// Tools
+		this.pannelPression = new JPanelEvent(station.getStatPression(), station.getListPression(), "Pression");
+		this.pannelAltitude = new JPanelEvent(station.getStatAltitude(), station.getListAltitude(), "Altitude");
+		this.pannelTemperature = new JPanelEvent(station.getStatTemperature(), station.getListTemperature(), "Temperature");
+		}
+
+	@Override
+	protected void geometry()
 		{
 		Box boxV = Box.createVerticalBox();
 		boxV.add(Box.createVerticalStrut(15));
@@ -62,12 +62,14 @@ public class JPanelData extends JPanel
 		add(boxV, BorderLayout.CENTER);
 		}
 
-	private void apparence()
+	@Override
+	protected void apparence()
 		{
 		//setBackground(Color.GREEN);
 		}
 
-	private void control()
+	@Override
+	protected void control()
 		{
 		// rien
 		}
@@ -75,9 +77,6 @@ public class JPanelData extends JPanel
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
-
-	// Inputs
-	private AfficheurServiceMOO afficheurServiceMOO;
 
 	// Tools
 	private JPanelEvent pannelPression;
