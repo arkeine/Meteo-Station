@@ -1,4 +1,3 @@
-
 package ch.hearc.meteo.imp.com.simulateur;
 
 import ch.hearc.meteo.imp.com.logique.MeteoService_A;
@@ -7,50 +6,58 @@ import ch.hearc.meteo.imp.com.simulateur.fonction.atome.FonctionPression;
 import ch.hearc.meteo.imp.com.simulateur.fonction.atome.FonctionTemperature;
 import ch.hearc.meteo.spec.com.meteo.exception.MeteoServiceException;
 
-public class MeteoServiceSimulateur extends MeteoService_A
-	{
+public class MeteoServiceSimulateur extends MeteoService_A {
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public MeteoServiceSimulateur(String namePort)
-		{
+	public MeteoServiceSimulateur(String namePort) {
 		super(namePort);
 
 		fonctionAltitude = new FonctionAltitude();
 		fonctionPression = new FonctionPression();
 		fonctionTemperature = new FonctionTemperature();
-		}
+	}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	@Override public void askAltitudeAsync()
-		{
+	@Override
+	public void askAltitudeAsync() {
 		altitudePerformed(fonctionAltitude.value());
-		}
+	}
 
-	@Override public void askPressionAsync()
-		{
+	@Override
+	public void askPressionAsync() {
 		pressionPerformed(fonctionPression.value());
-		}
+	}
 
-	@Override public void askTemperatureAsync()
-		{
+	@Override
+	public void askTemperatureAsync() {
 		temperaturePerformed(fonctionTemperature.value());
-		}
+	}
 
-	@Override protected void connectHardware() throws MeteoServiceException
-		{
+	@Override
+	protected void connectHardware() throws MeteoServiceException {
 		// rien
-		}
+	}
 
-	@Override protected void disconnectHardware() throws MeteoServiceException
-		{
+	@Override
+	protected void disconnectHardware() throws MeteoServiceException {
 		// rien
-		}
+	}
+
+	@Override
+	protected void startHardware() {
+		// rien
+	}
+
+	@Override
+	protected void stopHardware() {
+		// rien
+	}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
@@ -65,4 +72,4 @@ public class MeteoServiceSimulateur extends MeteoService_A
 	private FonctionPression fonctionPression;
 	private FonctionTemperature fonctionTemperature;
 
-	}
+}

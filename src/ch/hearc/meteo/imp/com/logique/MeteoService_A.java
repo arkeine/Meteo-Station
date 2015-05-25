@@ -3,6 +3,8 @@ package ch.hearc.meteo.imp.com.logique;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.MeteoService_I;
@@ -29,10 +31,11 @@ public abstract class MeteoService_A implements MeteoService_I ,MeteoServiceCall
 
 		// Tools
 		listMeteoListener = new LinkedList<MeteoListener_I>();
+		questionneur = new Questionneur(this);
 
 		isRunning = false;
 		isConnected = false;
-
+		
 		// Outputs
 		this.source = new Sources(namePort);
 		}
@@ -44,6 +47,11 @@ public abstract class MeteoService_A implements MeteoService_I ,MeteoServiceCall
 	protected abstract void connectHardware() throws MeteoServiceException;
 
 	protected abstract void disconnectHardware() throws MeteoServiceException;
+	
+	protected abstract void startHardware();
+	
+	protected abstract void stopHardware();
+
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
@@ -75,6 +83,7 @@ public abstract class MeteoService_A implements MeteoService_I ,MeteoServiceCall
 
 	/**
 	 * Call first connect
+	 * @throws MeteoServiceException 
 	 */
 	@Override synchronized public void start(MeteoServiceOptions meteoServiceOptions)
 		{
@@ -86,10 +95,15 @@ public abstract class MeteoService_A implements MeteoService_I ,MeteoServiceCall
 
 				this.meteoServiceOptions = meteoServiceOptions;
 				isRunning = true;
+				
+				startHardware();
 
-				questionneur = new Questionneur(this);
-				threadQuestionnaire = new Thread(questionneur);
-				threadQuestionnaire.start();
+				//v1 et 2
+//				threadQuestionnaire = new Thread(questionneur);
+//				threadQuestionnaire.start();
+				
+				//v3
+				EXECUTORS_SERVICE.submit(questionneur); //Appel asynchrone
 				}
 			else
 				{
@@ -102,6 +116,8 @@ public abstract class MeteoService_A implements MeteoService_I ,MeteoServiceCall
 			}
 		}
 
+
+
 	@Override synchronized public void stop()
 		{
 		System.out.println("MeteoService_A : Stop");
@@ -110,26 +126,29 @@ public abstract class MeteoService_A implements MeteoService_I ,MeteoServiceCall
 			{
 			isRunning = false;
 			questionneur.stopAsync(); // pas suffisant
+			
+			stopHardware();
 
 			//v1
-			while(threadQuestionnaire.isAlive())
-				{
-				try
-					{
-					Thread.sleep(DELAY_DEAD_THREAD);
-					}
-				catch (InterruptedException e)
-					{
-					e.printStackTrace();
-					}
-//				threadQuestionnaire = null;
-//				questionneur = null;
-				}
+//			while(threadQuestionnaire.isAlive())
+//				{
+//				try
+//					{
+//					Thread.sleep(DELAY_DEAD_THREAD);
+//					}
+//				catch (InterruptedException e)
+//					{
+//					e.printStackTrace();
+//					}
+////				threadQuestionnaire = null;
+////				questionneur = null;
+//				}
 
 			// V2
 			//thread.stop(); // vu la nature du thread, pas genant comme méthode
 
 			//v3 ou pool thread avec 1 thread
+			
 			}
 		}
 
@@ -255,7 +274,9 @@ public abstract class MeteoService_A implements MeteoService_I ,MeteoServiceCall
 
 	private boolean isConnected;
 
-	private Thread threadQuestionnaire;
+	//v1 et 2
+//	private Thread threadQuestionnaire;
+	
 
 	// Outputs
 	private Sources source;
@@ -264,6 +285,11 @@ public abstract class MeteoService_A implements MeteoService_I ,MeteoServiceCall
 	|*			  Static			*|
 	\*------------------------------*/
 
-	private static final long DELAY_DEAD_THREAD = 200;
+	//v1
+	//private static final long DELAY_DEAD_THREAD = 200;
+	
+	//v3
+	private static final ExecutorService EXECUTORS_SERVICE = Executors.newSingleThreadExecutor();
+	
 
 	}

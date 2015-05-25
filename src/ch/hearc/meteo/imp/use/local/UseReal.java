@@ -2,6 +2,7 @@
 package ch.hearc.meteo.imp.use.local;
 
 import ch.hearc.meteo.imp.afficheur.simulateur.AfficheurSimulateurFactory;
+import ch.hearc.meteo.imp.com.real.MeteoServiceFactory;
 import ch.hearc.meteo.imp.com.simulateur.MeteoServiceSimulatorFactory;
 import ch.hearc.meteo.spec.afficheur.AffichageOptions;
 import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
@@ -36,8 +37,11 @@ public class UseReal
 
 	public static void main() throws MeteoServiceException
 		{
-		String portName = "COM1";
-		MeteoService_I meteoService = (new MeteoServiceSimulatorFactory()).create(portName);
+//		String portName = "COM1";
+//		MeteoService_I meteoService = (new MeteoServiceSimulatorFactory()).create(portName);
+		String portName = "COM7";
+		MeteoService_I meteoService = (new MeteoServiceFactory()).create(portName);
+		
 		use(meteoService);
 		}
 
