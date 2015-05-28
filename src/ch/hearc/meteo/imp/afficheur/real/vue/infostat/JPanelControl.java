@@ -1,5 +1,5 @@
 
-package ch.hearc.meteo.imp.afficheur.real.vue;
+package ch.hearc.meteo.imp.afficheur.real.vue.infostat;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
-import ch.hearc.meteo.imp.afficheur.simulateur.moo.AfficheurServiceMOO;
+import ch.hearc.meteo.imp.afficheur.real.data.Station;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
@@ -22,10 +22,10 @@ public class JPanelControl extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelControl(AfficheurServiceMOO afficheurServiceMOO)
+	public JPanelControl(Station station)
 		{
-		this.afficheurServiceMOO = afficheurServiceMOO;
-		this.meteoServiceRemote = afficheurServiceMOO.getMeteoServiceRemote();
+		this.station = station;
+		this.meteoServiceRemote = station.getMeteoServiceRemote();
 
 		geometry();
 		control();
@@ -117,7 +117,7 @@ public class JPanelControl extends JPanel
 
 				@Override public void actionPerformed(ActionEvent e)
 					{
-					afficheurServiceMOO.setPause(!afficheurServiceMOO.isPause());
+					station.setPause(!station.isPause());
 					}
 			});
 
@@ -190,7 +190,7 @@ public class JPanelControl extends JPanel
 
 	// Input
 	private MeteoServiceWrapper_I meteoServiceRemote;
-	private AfficheurServiceMOO afficheurServiceMOO;
+	private Station station;
 
 	// Tools
 	private JButton boutonStart;

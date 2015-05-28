@@ -21,7 +21,10 @@ public class AfficheurServiceSimulateur implements AfficheurService_I
 	 */
 	public AfficheurServiceSimulateur(AffichageOptions affichageOptions, MeteoServiceWrapper_I meteoServiceRemote)
 		{
+		//Holder de données
 		afficheurServiceMOO = new AfficheurServiceMOO(affichageOptions, meteoServiceRemote);
+
+		//Fenêtre
 		jFrameAfficheurService = new JFrameAfficheurService(afficheurServiceMOO);
 		}
 
@@ -29,19 +32,22 @@ public class AfficheurServiceSimulateur implements AfficheurService_I
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	@Override public void printAltitude(MeteoEvent event)
+	@Override
+	public void printAltitude(MeteoEvent event)
 		{
 		afficheurServiceMOO.printAltitude(event);
 		jFrameAfficheurService.refresh();
 		}
 
-	@Override public void printTemperature(MeteoEvent event)
+	@Override
+	public void printTemperature(MeteoEvent event)
 		{
 		afficheurServiceMOO.printTemperature(event);
 		jFrameAfficheurService.refresh();
 		}
 
-	@Override public void printPression(MeteoEvent event)
+	@Override
+	public void printPression(MeteoEvent event)
 		{
 		afficheurServiceMOO.printPression(event);
 		jFrameAfficheurService.refresh();
@@ -51,7 +57,8 @@ public class AfficheurServiceSimulateur implements AfficheurService_I
 	|*				Set				*|
 	\*------------------------------*/
 
-	@Override public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
+	@Override
+	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
 		{
 		jFrameAfficheurService.updateMeteoServiceOptions(meteoServiceOptions);
 		}

@@ -17,10 +17,8 @@ public class JPanelData extends JPanel
 
 	public JPanelData(AfficheurServiceMOO afficheurServiceMOO)
 		{
-		// Inputs
-		this.afficheurServiceMOO = afficheurServiceMOO;
+		super();
 
-		// Tools
 		this.pannelPression = new JPanelEvent(afficheurServiceMOO.getStatPression(), afficheurServiceMOO.getListPression(), "Pression");
 		this.pannelAltitude = new JPanelEvent(afficheurServiceMOO.getStatAltitude(), afficheurServiceMOO.getListAltitude(), "Altitude");
 		this.pannelTemperature = new JPanelEvent(afficheurServiceMOO.getStatTemperature(), afficheurServiceMOO.getListTemperature(), "Temperature");
@@ -45,7 +43,7 @@ public class JPanelData extends JPanel
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
-	private void geometry()
+	protected void geometry()
 		{
 		Box boxV = Box.createVerticalBox();
 		boxV.add(Box.createVerticalStrut(15));
@@ -62,12 +60,12 @@ public class JPanelData extends JPanel
 		add(boxV, BorderLayout.CENTER);
 		}
 
-	private void apparence()
+	protected void apparence()
 		{
 		//setBackground(Color.GREEN);
 		}
 
-	private void control()
+	protected void control()
 		{
 		// rien
 		}
@@ -83,5 +81,6 @@ public class JPanelData extends JPanel
 	private JPanelEvent pannelPression;
 	private JPanelEvent pannelAltitude;
 	private JPanelEvent pannelTemperature;
+
 
 	}

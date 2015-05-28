@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="ext/BilatRmiTools.jar"/>
-	<classpathentry kind="lib" path="ext/jcommon-1.0.23.jar"/>
-	<classpathentry kind="lib" path="ext/jfreechart-1.0.19.jar"/>
-	<classpathentry kind="lib" path="ext/junit-4.11.jar"/>
-	<classpathentry kind="lib" path="ext/RXTXcomm.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="ext/BilatRmiTools.jar"/>
+	<classpathentry exported="true" kind="lib" path="ext/jcommon-1.0.23.jar"/>
+	<classpathentry exported="true" kind="lib" path="ext/jfreechart-1.0.19.jar"/>
+	<classpathentry exported="true" kind="lib" path="ext/junit-4.11.jar"/>
+	<classpathentry exported="true" kind="lib" path="ext/RXTXcomm.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Meteo-Station/ext/javacom/Windows/RXTX 2.1-7r2/rxtx-x64/ch-rxtx-2.2-20081207-win-x64"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
