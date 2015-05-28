@@ -1,6 +1,8 @@
 
 package ch.hearc.meteo.imp.use.local;
 
+import java.rmi.RemoteException;
+
 import ch.hearc.meteo.imp.afficheur.simulateur.AfficheurSimulateurFactory;
 import ch.hearc.meteo.imp.com.simulateur.MeteoServiceSimulatorFactory;
 import ch.hearc.meteo.spec.afficheur.AffichageOptions;
@@ -28,20 +30,20 @@ public class UseReal
 			{
 			main();
 			}
-		catch (MeteoServiceException e)
+		catch (MeteoServiceException | RemoteException e)
 			{
 			e.printStackTrace();
 			}
 		}
 
-	public static void main() throws MeteoServiceException
+	public static void main() throws MeteoServiceException, RemoteException
 		{
 		String portName = "COM1";
 		MeteoService_I meteoService = (new MeteoServiceSimulatorFactory()).create(portName);
 		use(meteoService);
 		}
 
-	public static void use(MeteoService_I meteoService) throws MeteoServiceException
+	public static void use(MeteoService_I meteoService) throws MeteoServiceException, RemoteException
 		{
 		// Service Meteo
 		meteoService.connect();
