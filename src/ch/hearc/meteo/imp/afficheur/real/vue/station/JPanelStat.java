@@ -1,5 +1,5 @@
 
-package ch.hearc.meteo.imp.afficheur.real.vue.infostat;
+package ch.hearc.meteo.imp.afficheur.real.vue.station;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -20,10 +20,8 @@ public class JPanelStat extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelStat(Stat stat)
+	public JPanelStat()
 		{
-		this.stat = stat;
-
 		geometry();
 		control();
 		apparence();
@@ -32,6 +30,11 @@ public class JPanelStat extends JPanel
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
+
+	public void setState(Stat stat)
+		{
+		this.stat = stat;
+		}
 
 	public void update()
 		{

@@ -2,45 +2,57 @@
 package ch.hearc.meteo.imp.afficheur.real;
 
 
-import ch.hearc.meteo.imp.afficheur.real.controller.MainController;
+import ch.hearc.meteo.imp.afficheur.real.data.Station;
+import ch.hearc.meteo.imp.afficheur.real.vue.JFrameLocale;
+import ch.hearc.meteo.imp.afficheur.real.vue.station.JPanelStation;
 import ch.hearc.meteo.spec.afficheur.AffichageOptions;
 import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
-public class AfficheurService implements AfficheurService_I//eventuellement dans Datacontrolleur
+public class AfficheurServiceLocale implements AfficheurService_I//eventuellement dans Datacontrolleur
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public AfficheurService(AffichageOptions affichageOptions, MeteoServiceWrapper_I meteoServiceRemote)
+	public AfficheurServiceLocale(AffichageOptions affichageOptions, MeteoServiceWrapper_I meteoServiceRemote)
 		{
-		//Recup affichageOptions, meteoServiceRemote dans une classe controleur
-		mainController = MainController.getInstance();
-		mainController.addStation(affichageOptions, meteoServiceRemote);
+		//Holder de données
+		this.station = new Station(affichageOptions, meteoServiceRemote);
+
+		//Afficheur de données
+		jpanel = new JPanelStation();
+		jpanel.setStation(station);
+
+		//Fenêtre
+		JFrameLocale jframe = new JFrameLocale();
+		jframe.add(jpanel);
+		jframe.setVisible(true);
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	//++ refresh dans les 3
 	@Override public void printAltitude(MeteoEvent event)
 		{
-		mainController.printPression(event);
+		station.printAltitude(event);
+		jpanel.update();
 		}
 
 	@Override public void printTemperature(MeteoEvent event)
 		{
-		mainController.printTemperature(event);
+		station.printTemperature(event);
+		jpanel.update();
 		}
 
 	@Override public void printPression(MeteoEvent event)
 		{
-		mainController.printPression(event);
+		station.printPression(event);
+		jpanel.update();
 		}
 
 	/*------------------------------*\
@@ -49,7 +61,7 @@ public class AfficheurService implements AfficheurService_I//eventuellement dans
 
 	@Override public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
 		{
-		mainController.updateMeteoServiceOptions(meteoServiceOptions);
+		jpanel.updateMeteoServiceOptions(meteoServiceOptions);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -61,6 +73,7 @@ public class AfficheurService implements AfficheurService_I//eventuellement dans
 	\*------------------------------------------------------------------*/
 
 	// Tools
-	private MainController mainController;
+	private Station station;
+	private JPanelStation jpanel;
 
 	}

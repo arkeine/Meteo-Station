@@ -1,5 +1,5 @@
 
-package ch.hearc.meteo.imp.afficheur.real.vue.infostat;
+package ch.hearc.meteo.imp.afficheur.real.vue.station;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -10,7 +10,6 @@ import javax.swing.Box;
 import javax.swing.JPanel;
 
 import ch.hearc.meteo.imp.afficheur.real.data.Stat;
-import ch.hearc.meteo.imp.afficheur.simulateur.vue.atome.BoxSerieTemporelle;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
 
 public class JPanelEvent extends JPanel
@@ -20,10 +19,8 @@ public class JPanelEvent extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelEvent(Stat stat, List<MeteoEvent> listMeteoEvent, String titre)
+	public JPanelEvent(String titre)
 		{
-		this.stat = stat;
-		this.listMeteoEvent = listMeteoEvent;
 		this.titre = titre;
 
 		geometry();
@@ -35,9 +32,17 @@ public class JPanelEvent extends JPanel
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
+	public void setStationEvent(Stat stat, List<MeteoEvent> listMeteoEvent)
+	{
+		this.stat = stat;
+		panelStat.setState(stat);
+		this.listMeteoEvent = listMeteoEvent;
+		boxSerieTemporelle.setListMeteoEvent(listMeteoEvent);
+	}
+
 	public void update()
 		{
-		boxSerieTemnporelle.update();
+		boxSerieTemporelle.update();
 		panelStat.update();
 		}
 
@@ -47,17 +52,17 @@ public class JPanelEvent extends JPanel
 
 	private void geometry()
 		{
-		panelStat = new JPanelStat(stat);
-		boxSerieTemnporelle = new BoxSerieTemporelle(listMeteoEvent);
+		panelStat = new JPanelStat();
+		boxSerieTemporelle = new BoxSerieTemporelle();//listMeteoEvent);
 
 		panelStat.setMaximumSize(new Dimension(180, 100));
-		boxSerieTemnporelle.setMaximumSize(new Dimension(250, 100));
+		boxSerieTemporelle.setMaximumSize(new Dimension(250, 100));
 
 		Box boxH = Box.createHorizontalBox();
 		boxH.add(Box.createHorizontalStrut(15));
 		boxH.add(panelStat);
 		boxH.add(Box.createHorizontalStrut(15));
-		boxH.add(boxSerieTemnporelle);
+		boxH.add(boxSerieTemporelle);
 		boxH.add(Box.createHorizontalStrut(15));
 
 		Box boxV = Box.createVerticalBox();
@@ -92,6 +97,6 @@ public class JPanelEvent extends JPanel
 
 	// Tools
 	private JPanelStat panelStat;
-	private BoxSerieTemporelle boxSerieTemnporelle;
+	private BoxSerieTemporelle boxSerieTemporelle;
 
 	}

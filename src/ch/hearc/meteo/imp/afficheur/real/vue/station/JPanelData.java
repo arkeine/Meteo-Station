@@ -1,28 +1,38 @@
 
-package ch.hearc.meteo.imp.afficheur.real.vue.infostat;
+package ch.hearc.meteo.imp.afficheur.real.vue.station;
 
 import java.awt.BorderLayout;
 
 import javax.swing.Box;
 
 import ch.hearc.meteo.imp.afficheur.real.data.Station;
-import ch.hearc.meteo.imp.afficheur.real.vue.panel.JPanelMain;
+import ch.hearc.meteo.imp.afficheur.real.vue.structure.JPanelMain_A;
 
-public class JPanelData extends JPanelMain
+public class JPanelData extends JPanelMain_A
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelData(Station station)
+	public JPanelData()
 		{
-		super(station);
+		super();
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
+
+	@Override
+	public void setStation(Station station)
+		{
+		super.setStation(station);
+
+		pannelPression.setStationEvent(station.getStatPression(), station.getListPression());
+		pannelAltitude.setStationEvent(station.getStatAltitude(), station.getListAltitude());
+		pannelTemperature.setStationEvent(station.getStatTemperature(), station.getListTemperature());
+		}
 
 	public void update()
 		{
@@ -38,10 +48,9 @@ public class JPanelData extends JPanelMain
 	@Override
 	protected void init()
 		{
-		// Tools
-		this.pannelPression = new JPanelEvent(station.getStatPression(), station.getListPression(), "Pression");
-		this.pannelAltitude = new JPanelEvent(station.getStatAltitude(), station.getListAltitude(), "Altitude");
-		this.pannelTemperature = new JPanelEvent(station.getStatTemperature(), station.getListTemperature(), "Temperature");
+		this.pannelPression = new JPanelEvent("Pression");
+		this.pannelAltitude = new JPanelEvent("Altitude");
+		this.pannelTemperature = new JPanelEvent("Temperature");
 		}
 
 	@Override

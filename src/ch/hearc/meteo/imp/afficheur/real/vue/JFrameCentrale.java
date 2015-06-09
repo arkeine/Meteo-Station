@@ -2,24 +2,39 @@
 package ch.hearc.meteo.imp.afficheur.real.vue;
 
 import javax.swing.JFrame;
-import javax.swing.JMenuBar;
+import javax.swing.JTabbedPane;
 
-import ch.hearc.meteo.imp.afficheur.real.controller.DataController;
-import ch.hearc.meteo.imp.afficheur.real.controller.PageController;
-import ch.hearc.meteo.imp.afficheur.real.vue.panel.JPanelMain;
-
-public class JFrameMain extends JFrame
+public class JFrameCentrale extends JFrame
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JFrameMain()
+	public JFrameCentrale()
 		{
+		isInstanced = false;
+
 		geometry();
 		control();
 		apparence();
+		}
+
+	/*------------------------------*\
+	|*			  Static			*|
+	\*------------------------------*/
+
+	//Constructor singleton
+	public static JFrameCentrale getInstance()
+		{
+		//Constructeur appellé une seule fois
+		if (!isInstanced)
+			{
+			jframeCentrale = new JFrameCentrale();
+			isInstanced = true;
+			}
+
+		return jframeCentrale;
 		}
 
 	/*------------------------------------------------------------------*\
@@ -30,18 +45,13 @@ public class JFrameMain extends JFrame
 	|*				Set				*|
 	\*------------------------------*/
 
-	public void addMenu(JPanelMain jPanelMain) {
-		menuBar.add(jPanelMain);
-	}
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
 	private void geometry()
 		{
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
+		//TODO
 		}
 
 	private void control()
@@ -55,19 +65,15 @@ public class JFrameMain extends JFrame
 
 		setSize(500, 550);
 		setResizable(false);
-		setVisible(true);
 		}
-
 
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 
-	// Inputs
-	private DataController dataController;
-	private PageController pagecontroller;
-
 	// Tools
-	private JMenuBar menuBar;
+	private static boolean isInstanced;
+	private static JFrameCentrale jframeCentrale;
+	private JTabbedPane tabbedPane;
 
 	}
