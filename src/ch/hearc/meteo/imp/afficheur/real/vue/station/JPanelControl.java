@@ -1,5 +1,5 @@
 
-package ch.hearc.meteo.imp.afficheur.real.vue.infostat;
+package ch.hearc.meteo.imp.afficheur.real.vue.station;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -8,44 +8,49 @@ import java.rmi.RemoteException;
 
 import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
 import ch.hearc.meteo.imp.afficheur.real.data.Station;
+import ch.hearc.meteo.imp.afficheur.real.vue.structure.JPanelMain_A;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
-public class JPanelControl extends JPanel
+public class JPanelControl extends JPanelMain_A
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelControl(Station station)
+	public JPanelControl()
 		{
-		this.station = station;
-		this.meteoServiceRemote = station.getMeteoServiceRemote();
-
-		geometry();
-		control();
-		apparence();
+		super();
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
+	@Override
+	public void setStation(Station station)
+		{
+		super.setStation(station);//== this.station = station;
+//		panelSlider.setStation(station);
+		this.meteoServiceRemote = station.getMeteoServiceRemote();
+
+		setServiceControl();
+		}
+
 	/*------------------------------------------------------------------*\
-	|*							Methodes Private						*|
+	|*							Methodes Protected						*|
 	\*------------------------------------------------------------------*/
 
-	private void geometry()
+	@Override
+	protected void geometry()
 		{
 		boutonStart = new JButton("Start");
 		boutonStop = new JButton("Stop");
 		boutonPause = new JToggleButton("Pause");
-
 
 		boutonPause.setToolTipText("Affichage only");
 
@@ -62,17 +67,29 @@ public class JPanelControl extends JPanel
 		add(boxH, BorderLayout.CENTER);
 		}
 
-	private void apparence()
+	@Override
+	protected void apparence()
 		{
 		// setBackground(Color.YELLOW);
 		}
 
-	private void control()
+	@Override
+	protected void control()
+		{
+		// Rien au début
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private void setServiceControl()
 		{
 		boutonStart.addActionListener(new ActionListener()
 			{
 
-				@Override public void actionPerformed(ActionEvent e)
+				@Override
+				public void actionPerformed(ActionEvent e)
 					{
 					try
 						{
@@ -96,7 +113,8 @@ public class JPanelControl extends JPanel
 		boutonStop.addActionListener(new ActionListener()
 			{
 
-				@Override public void actionPerformed(ActionEvent e)
+				@Override
+				public void actionPerformed(ActionEvent e)
 					{
 					try
 						{
@@ -115,7 +133,8 @@ public class JPanelControl extends JPanel
 		boutonPause.addActionListener(new ActionListener()
 			{
 
-				@Override public void actionPerformed(ActionEvent e)
+				@Override
+				public void actionPerformed(ActionEvent e)
 					{
 					station.setPause(!station.isPause());
 					}
@@ -124,7 +143,8 @@ public class JPanelControl extends JPanel
 		threadEtatBouton = new Thread(new Runnable()
 			{
 
-				@Override public void run()
+				@Override
+				public void run()
 					{
 					while(true)
 						{
@@ -204,5 +224,12 @@ public class JPanelControl extends JPanel
 	\*------------------------------*/
 
 	private static final long POOLING_ETAT_BOUTON_DT = 2000;
+
+	@Override
+	protected void init()
+		{
+		// TODO Auto-generated method stub
+
+		}
 
 	}

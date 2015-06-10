@@ -1,47 +1,57 @@
 
-package ch.hearc.meteo.imp.afficheur.real.vue.panel;
+package ch.hearc.meteo.imp.afficheur.real.vue;
 
-import javax.swing.JPanel;
+import javax.swing.JFrame;
 
-import ch.hearc.meteo.imp.afficheur.real.data.Station;
-
-public abstract class JPanelMain extends JPanel
+public class JFrameLocale extends JFrame
 	{
-
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelMain(Station station)
+	public JFrameLocale()
 		{
-		this.station = station;
-
-		init();
 		geometry();
 		control();
 		apparence();
 		}
 
-	protected abstract void init();
-	protected abstract void apparence();
-	protected abstract void control();
-	protected abstract void geometry();
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
+
+	/*------------------------------*\
+	|*				Set				*|
+	\*------------------------------*/
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
+	private void geometry()
+		{
+		//tabbedPane = new JTabbedPane();
+		}
+
+	private void control()
+		{
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		}
+
+	private void apparence()
+		{
+		setTitle("Station Météo");
+
+		setSize(500, 550);
+//		setResizable(true);
+		}
 
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 
 	// Tools
-	protected Station station;
+	//private JTabbedPane tabbedPane;
 
 	}

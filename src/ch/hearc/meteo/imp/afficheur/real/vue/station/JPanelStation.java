@@ -1,40 +1,46 @@
 
-package ch.hearc.meteo.imp.afficheur.real.vue.panel;
+package ch.hearc.meteo.imp.afficheur.real.vue.station;
 
 import java.awt.BorderLayout;
 
-import javax.swing.Box;
-
 import ch.hearc.meteo.imp.afficheur.real.data.Station;
-import ch.hearc.meteo.imp.afficheur.real.vue.infostat.JPanelControl;
-import ch.hearc.meteo.imp.afficheur.real.vue.infostat.JPanelData;
-import ch.hearc.meteo.imp.afficheur.real.vue.infostat.JPanelSlider;
+import ch.hearc.meteo.imp.afficheur.real.vue.structure.JPanelRoot_A;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 
-public class JPanelInfoStation extends JPanelMain
+public class JPanelStation extends JPanelRoot_A//JPanelMain implements JPanelRoot_I
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelInfoStation(Station station)
+	public JPanelStation()
 		{
-		super(station);
+		super();
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
+	@Override
+	public void setStation(Station station)
+		{
+		super.setStation(station);
+		panelControl.setStation(station);
+		panelData.setStation(station);
+		}
+
+	@Override
 	public void update()
 		{
 		panelData.update();
 		}
 
+	@Override
 	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
 		{
-		panelSlider.updateMeteoServiceOptions(meteoServiceOptions);
+//		panelControl.updateMeteoServiceOptions(meteoServiceOptions);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -44,27 +50,24 @@ public class JPanelInfoStation extends JPanelMain
 	@Override
 	protected void init()
 		{
-		this.panelControl = new JPanelControl(station);
-		this.panelData = new JPanelData(station);
-		this.panelSlider = new JPanelSlider(station);
+		//Rien
 		}
 
 	@Override
 	protected void geometry()
 		{
-		Box boxV = Box.createVerticalBox();
-		boxV.add(panelData);
-		boxV.add(panelSlider);
-		boxV.add(panelControl);
-		boxV.add(Box.createVerticalStrut(15));
+		// JComponent : Instanciation
+		panelData = new JPanelData();
+		panelControl = new JPanelControl();
 
-		Box boxH = Box.createHorizontalBox();
-		boxH.add(Box.createHorizontalStrut(15));
-		boxH.add(boxV);
-		boxH.add(Box.createHorizontalStrut(15));
+			// Layout : Specification
+			{
+			setLayout(new BorderLayout());
+			}
 
-		setLayout(new BorderLayout());
-		add(boxH, BorderLayout.CENTER);
+		// JComponent : add
+		add(panelData, BorderLayout.CENTER);
+		add(panelControl, BorderLayout.SOUTH);
 		}
 
 	@Override
@@ -85,8 +88,8 @@ public class JPanelInfoStation extends JPanelMain
 	\*------------------------------------------------------------------*/
 
 	// Tools
-	private JPanelControl panelControl;
 	private JPanelData panelData;
-	private JPanelSlider panelSlider;
+	private JPanelControl panelControl;//Mettre slider dans control
+
 
 	}

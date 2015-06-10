@@ -1,36 +1,51 @@
 
-package ch.hearc.meteo.imp.afficheur.real.controller;
+package ch.hearc.meteo.imp.afficheur.real.vue.central;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.swing.JPanel;
 
-import ch.hearc.meteo.imp.afficheur.real.data.Station;
-
-public class DataController
+public class JPanelMapStation extends JPanel
 	{
+
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public DataController()
+	public JPanelMapStation()
 		{
-		listStations = new ArrayList<Station>();
+		geometry();
+		control();
+		apparence();
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public void addStation(Station station) {
-		listStations.add(station);
-	}
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private void geometry()
+		{
+
+		}
+
+	private void apparence()
+		{
+		// rien
+		//setBackground(Color.ORANGE);
+		}
+
+	private void control()
+		{
+		// rien
+		}
 
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 
 	// Tools
-	private List<Station> listStations;
 
 	}
