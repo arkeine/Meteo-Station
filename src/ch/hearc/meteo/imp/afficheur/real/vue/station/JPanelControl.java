@@ -35,6 +35,7 @@ public class JPanelControl extends JPanelMain_A
 	public void setStation(Station station)
 		{
 		super.setStation(station);//== this.station = station;
+//		panelSlider.setStation(station);
 		this.meteoServiceRemote = station.getMeteoServiceRemote();
 
 		setServiceControl();

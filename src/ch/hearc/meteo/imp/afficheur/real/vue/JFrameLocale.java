@@ -44,7 +44,7 @@ public class JFrameLocale extends JFrame
 		setTitle("Station Météo");
 
 		setSize(500, 550);
-		setResizable(false);
+//		setResizable(true);
 		}
 
 	/*------------------------------------------------------------------*\

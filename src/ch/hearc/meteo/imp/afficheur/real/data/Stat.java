@@ -53,22 +53,22 @@ public class Stat
 	|*				Get				*|
 	\*------------------------------*/
 
-	public float getMin()
+	public float getMinimum()
 		{
 		return this.min;
 		}
 
-	public float getMax()
+	public float getMaximum()
 		{
 		return this.max;
 		}
 
-	public float getMoy()
+	public float getAverage()
 		{
 		return moy;
 		}
 
-	public float getLast()
+	public float getAverageTen()
 		{
 		return last;
 		}

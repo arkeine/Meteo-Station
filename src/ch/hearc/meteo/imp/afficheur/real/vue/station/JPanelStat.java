@@ -1,12 +1,10 @@
 
 package ch.hearc.meteo.imp.afficheur.real.vue.station;
 
-import java.awt.Color;
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -38,10 +36,10 @@ public class JPanelStat extends JPanel
 
 	public void update()
 		{
-		labelCurrent.setText("" + MathTools.arrondir(stat.getLast()));
-		labelMin.setText("min " + MathTools.arrondir(stat.getMin()));
-		labelMax.setText("max " + MathTools.arrondir(stat.getMax()));
-		labelMoy.setText("moy " + MathTools.arrondir(stat.getMoy()));
+		labelAverageTen.setText("" + MathTools.arrondir(stat.getAverageTen()));
+		labelAverage.setText("moy " + MathTools.arrondir(stat.getAverage()));
+		labelMinimum.setText("min " + MathTools.arrondir(stat.getMinimum()));
+		labelMaximum.setText("max " + MathTools.arrondir(stat.getMaximum()));
 		}
 
 	/*------------------------------------------------------------------*\
@@ -50,37 +48,45 @@ public class JPanelStat extends JPanel
 
 	private void geometry()
 		{
-		labelCurrent = new JLabel("-----");
+		// JComponent : Instanciation
+		labelAverageTen = new JLabel("-----");
+		labelAverage = new JLabel("moy ------");
+		labelMinimum = new JLabel("min ------");
+		labelMaximum = new JLabel("max ------");
 
-		boxV();
+		JPanel panelCenter = new JPanel();
+		//panelControl
+		//panelVariation
+		JPanel panelMainInfo = new JPanel();
+		JPanel panelSecondaryInfos = new JPanel();
 
-		GridLayout layout = new GridLayout(1, 1);
-		layout.setHgap(15);
-		setLayout(layout);
-		add(labelCurrent);
-		add(boxV);
-		}
+			// Layout : Specification
+			{
+			setLayout(new BorderLayout());
+			panelCenter.setLayout(new BorderLayout());
+			panelMainInfo.setLayout(new BorderLayout());
+			panelSecondaryInfos.setLayout(new GridLayout(3, 0));
+			}
 
-	private void boxV()
-		{
-		labelMin = new JLabel("min ------");
-		labelMax = new JLabel("max ------");
-		labelMoy = new JLabel("moy ------");
+		// JComponent : add
+		panelMainInfo.add(new JLabel("Moyenne progressive"), BorderLayout.NORTH);
+		panelMainInfo.add(labelAverageTen, BorderLayout.CENTER);
 
-		boxV = Box.createVerticalBox();
+		panelSecondaryInfos.add(labelAverage);
+		panelSecondaryInfos.add(labelMaximum);
+		panelSecondaryInfos.add(labelMinimum);
 
-		boxV.add(labelMin);
-		boxV.add(labelMax);
-		boxV.add(Box.createVerticalGlue());
-		boxV.add(labelMoy);
+		panelCenter.add(panelMainInfo, BorderLayout.CENTER);
+		panelCenter.add(panelSecondaryInfos, BorderLayout.EAST);
+
+		add(panelCenter, BorderLayout.CENTER);
 		}
 
 	private void apparence()
 		{
-		labelCurrent.setFont(new Font("courier", Font.BOLD, 25));
-		labelCurrent.setForeground(Color.RED);
-
-		setBorder(BorderFactory.createTitledBorder("Statistique"));
+		labelAverageTen.setFont(new Font("courier", Font.BOLD, 25));
+		//		labelCurrent.setForeground(Color.RED);
+		//		setBorder(BorderFactory.createTitledBorder("Statistique"));
 		}
 
 	private void control()
@@ -96,11 +102,9 @@ public class JPanelStat extends JPanel
 	private Stat stat;
 
 	// Tools
-	private JLabel labelCurrent;
-	private JLabel labelMin;
-	private JLabel labelMax;
-	private JLabel labelMoy;
-
-	private Box boxV;
+	private JLabel labelAverageTen;
+	private JLabel labelMinimum;
+	private JLabel labelMaximum;
+	private JLabel labelAverage;
 
 	}

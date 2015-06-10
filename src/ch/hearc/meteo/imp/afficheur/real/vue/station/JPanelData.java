@@ -1,9 +1,7 @@
 
 package ch.hearc.meteo.imp.afficheur.real.vue.station;
 
-import java.awt.BorderLayout;
-
-import javax.swing.Box;
+import java.awt.GridLayout;
 
 import ch.hearc.meteo.imp.afficheur.real.data.Station;
 import ch.hearc.meteo.imp.afficheur.real.vue.structure.JPanelMain_A;
@@ -48,27 +46,27 @@ public class JPanelData extends JPanelMain_A
 	@Override
 	protected void init()
 		{
-		this.pannelPression = new JPanelEvent("Pression");
-		this.pannelAltitude = new JPanelEvent("Altitude");
-		this.pannelTemperature = new JPanelEvent("Temperature");
+
 		}
 
 	@Override
 	protected void geometry()
 		{
-		Box boxV = Box.createVerticalBox();
-		boxV.add(Box.createVerticalStrut(15));
-		boxV.add(pannelPression);
-		boxV.add(Box.createVerticalStrut(15));
-		boxV.add(pannelAltitude);
-		boxV.add(Box.createVerticalStrut(15));
-		boxV.add(pannelTemperature);
-		boxV.add(Box.createVerticalStrut(15));
+		// JComponent : Instanciation
+		pannelPression = new JPanelEvent("Pression");
+		pannelAltitude = new JPanelEvent("Altitude");
+		pannelTemperature = new JPanelEvent("Temperature");
 
-		//boxV.setBackground(Color.BLUE);
+			// Layout : Specification
+			{
+			setLayout(new GridLayout(3, 0));
+//			setBackground(Color.BLACK);
+			}
 
-		setLayout(new BorderLayout());
-		add(boxV, BorderLayout.CENTER);
+		// JComponent : add
+		add(pannelAltitude);
+		add(pannelPression);
+		add(pannelTemperature);
 		}
 
 	@Override

@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.JPanel;
 
 import ch.hearc.meteo.imp.afficheur.real.data.Stat;
@@ -33,16 +32,14 @@ public class JPanelEvent extends JPanel
 	\*------------------------------------------------------------------*/
 
 	public void setStationEvent(Stat stat, List<MeteoEvent> listMeteoEvent)
-	{
-		this.stat = stat;
+		{
+		panelGraph.setListMeteoEvent(listMeteoEvent);
 		panelStat.setState(stat);
-		this.listMeteoEvent = listMeteoEvent;
-		boxSerieTemporelle.setListMeteoEvent(listMeteoEvent);
-	}
+		}
 
 	public void update()
 		{
-		boxSerieTemporelle.update();
+		panelGraph.update();
 		panelStat.update();
 		}
 
@@ -52,32 +49,26 @@ public class JPanelEvent extends JPanel
 
 	private void geometry()
 		{
+		// JComponent : Instanciation
 		panelStat = new JPanelStat();
-		boxSerieTemporelle = new BoxSerieTemporelle();//listMeteoEvent);
+		panelGraph = new JPanelGraph(titre);//listMeteoEvent);
 
 		panelStat.setMaximumSize(new Dimension(180, 100));
-		boxSerieTemporelle.setMaximumSize(new Dimension(250, 100));
+		panelGraph.setMaximumSize(new Dimension(250, 100));
 
-		Box boxH = Box.createHorizontalBox();
-		boxH.add(Box.createHorizontalStrut(15));
-		boxH.add(panelStat);
-		boxH.add(Box.createHorizontalStrut(15));
-		boxH.add(boxSerieTemporelle);
-		boxH.add(Box.createHorizontalStrut(15));
+			// Layout : Specification
+			{
+			setLayout(new BorderLayout());
+			}
 
-		Box boxV = Box.createVerticalBox();
-		boxV.add(Box.createVerticalStrut(15));
-		boxV.add(boxH);
-		boxV.add(Box.createVerticalStrut(15));
-
-		setLayout(new BorderLayout());
-		add(boxV, BorderLayout.CENTER);
-		setBorder(BorderFactory.createTitledBorder(titre));
+		// JComponent : add
+		add(panelGraph, BorderLayout.CENTER);
+		add(panelStat, BorderLayout.WEST);
 		}
 
 	private void apparence()
 		{
-		// rien
+		setBorder(BorderFactory.createTitledBorder(titre));
 		}
 
 	private void control()
@@ -90,13 +81,10 @@ public class JPanelEvent extends JPanel
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	private Stat stat;
-
-	private List<MeteoEvent> listMeteoEvent;
 	private String titre;
 
 	// Tools
 	private JPanelStat panelStat;
-	private BoxSerieTemporelle boxSerieTemporelle;
+	private JPanelGraph panelGraph;
 
 	}
