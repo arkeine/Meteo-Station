@@ -87,5 +87,4 @@ public class MeteoServiceWrapper implements MeteoServiceWrapper_I
 
 	// Inputs
 	private MeteoService_I meteoService;
-
 	}

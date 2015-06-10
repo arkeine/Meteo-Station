@@ -13,6 +13,7 @@ public interface MeteoService_I
 
 	/**
 	 * DT = Delta Time in ms
+	 * @throws MeteoServiceException 
 	 */
 	public void start(MeteoServiceOptions meteoServiceOptions);
 

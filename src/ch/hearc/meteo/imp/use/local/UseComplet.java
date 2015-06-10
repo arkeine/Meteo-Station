@@ -2,6 +2,7 @@
 package ch.hearc.meteo.imp.use.local;
 
 import ch.hearc.meteo.imp.afficheur.simulateur.AfficheurSimulateurFactory;
+import ch.hearc.meteo.imp.com.real.MeteoServiceFactory;
 import ch.hearc.meteo.imp.com.simulateur.MeteoServiceSimulatorFactory;
 import ch.hearc.meteo.spec.afficheur.AffichageOptions;
 import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
@@ -36,8 +37,9 @@ public class UseComplet
 
 	public static void main() throws MeteoServiceException
 		{
-		String portName = "COM1";
-		MeteoService_I meteoService = (new MeteoServiceSimulatorFactory()).create(portName);
+		String portName = "COM7";
+//		MeteoService_I meteoService = (new MeteoServiceSimulatorFactory()).create(portName);
+		MeteoService_I meteoService = (new MeteoServiceFactory()).create(portName);
 		use(meteoService);
 		}
 
@@ -71,15 +73,15 @@ public class UseComplet
 					afficheurService.printTemperature(event);
 					}
 
-				//				@Override public void altitudePerformed(MeteoEvent event)
-				//					{
-				//					afficheurService.printAltitude(event);
-				//					}
-				//
-				//				@Override public void pressionPerformed(MeteoEvent event)
-				//					{
-				//					afficheurService.printPression(event);
-				//					}
+								@Override public void altitudePerformed(MeteoEvent event)
+									{
+									afficheurService.printAltitude(event);
+									}
+				
+								@Override public void pressionPerformed(MeteoEvent event)
+									{
+									afficheurService.printPression(event);
+									}
 
 			});
 
@@ -96,7 +98,7 @@ public class UseComplet
 						{
 						long dt = 1000 + (long)(5000 * Math.abs(Math.cos(x))); //ms
 
-						System.out.println("modification dt temperature = " + dt);
+						System.out.println("modification dt = " + dt);
 
 						meteoService.getMeteoServiceOptions().setTemperatureDT(dt);
 

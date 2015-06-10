@@ -27,11 +27,13 @@ public class AfficheurSimulateurFactory implements AfficheurFactory_I
 
 	@Override public AfficheurService_I createOnLocalPC(AffichageOptions affichageOptions, MeteoServiceWrapper_I meteoServiceRemote)
 		{
+		System.out.println("toto1");
 		return new AfficheurServiceSimulateur(affichageOptions, meteoServiceRemote);
 		}
 
 	@Override public AfficheurService_I createOnCentralPC(AffichageOptions affichageOptions, MeteoServiceWrapper_I meteoServiceRemote)
 		{
+		System.out.println("toto2");
 		return new AfficheurServiceSimulateur(affichageOptions, meteoServiceRemote);
 		}
 

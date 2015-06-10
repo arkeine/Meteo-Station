@@ -1,6 +1,9 @@
 
 package ch.hearc.meteo.imp.use.remote.pclocal;
 
+import ch.hearc.meteo.spec.afficheur.AffichageOptions;
+import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
+
 public class UsePCLocal
 	{
 
@@ -15,7 +18,12 @@ public class UsePCLocal
 
 	public static void main()
 		{
-		//TODO
+		String portName = "COM1";
+		MeteoServiceOptions meteoServiceOptions = new MeteoServiceOptions(800, 1000, 1200);
+		AffichageOptions affichageOption = new AffichageOptions(3,  "OPTION");
+
+		PCLocal local = new PCLocal(meteoServiceOptions, portName, affichageOption, null);
+		local.run();
 		}
 
 	/*------------------------------------------------------------------*\
