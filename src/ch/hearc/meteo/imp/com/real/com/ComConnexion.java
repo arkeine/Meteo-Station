@@ -1,24 +1,20 @@
 package ch.hearc.meteo.imp.com.real.com;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.util.Enumeration;
-import java.util.TooManyListenersException;
-
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.util.TooManyListenersException;
+
 import ch.hearc.meteo.imp.com.logique.MeteoServiceCallback_I;
 import ch.hearc.meteo.imp.com.real.com.trame.TrameDecoder;
 import ch.hearc.meteo.imp.com.real.com.trame.TrameEncoder;
-import ch.hearc.meteo.spec.com.meteo.MeteoService_I;
 import ch.hearc.meteo.spec.com.meteo.exception.MeteoServiceException;
-import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEventType_E;
 
 // TODO student
 //  Implémenter cette classe
@@ -94,7 +90,6 @@ public class ComConnexion implements ComConnexions_I {
 				public void serialEvent(SerialPortEvent event) {
 					switch (event.getEventType()) {
 					case SerialPortEvent.DATA_AVAILABLE:
-						System.out.println("Data recieved"); //pour débug
 						treatData();
 						break;
 					}
@@ -114,18 +109,11 @@ public class ComConnexion implements ComConnexions_I {
 
 	@Override
 	public void connect() throws Exception {
-		CommPortIdentifier portId = CommPortIdentifier
+		portId = CommPortIdentifier
 				.getPortIdentifier(portName);
 
-		// Enumeration<CommPortIdentifier> portEnum =
-		// CommPortIdentifier.getPortIdentifiers();
-		// while(portEnum.hasMoreElements()){
-		// CommPortIdentifier port = portEnum.nextElement();
-		// System.out.println(port.getName()+" - "+port.getPortType());
-		// }
-
 		serialPort = (SerialPort) portId.open(this.getClass().getSimpleName(),
-				100);
+				10000);
 		serialPort.setSerialPortParams(comOption.getSpeed(),
 				comOption.getDataBit(), comOption.getStopBit(),
 				comOption.getParity());
@@ -134,7 +122,6 @@ public class ComConnexion implements ComConnexions_I {
 		isr = new InputStreamReader(serialPort.getInputStream());
 		reader = new BufferedReader(isr);
 		os = serialPort.getOutputStream();
-
 	}
 
 	@Override
@@ -217,6 +204,7 @@ public class ComConnexion implements ComConnexions_I {
 	private MeteoServiceCallback_I meteoServiceCallback;
 
 	// Tools
+	private CommPortIdentifier portId;
 	private SerialPort serialPort;
 	private OutputStream os;
 	private BufferedReader reader;

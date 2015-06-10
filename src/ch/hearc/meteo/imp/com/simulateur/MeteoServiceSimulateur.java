@@ -50,12 +50,12 @@ public class MeteoServiceSimulateur extends MeteoService_A {
 	}
 
 	@Override
-	protected void startHardware() {
+	public void startHardware() {
 		// rien
 	}
 
 	@Override
-	protected void stopHardware() {
+	public void stopHardware() {
 		// rien
 	}
 
