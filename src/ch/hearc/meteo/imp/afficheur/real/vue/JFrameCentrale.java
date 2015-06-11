@@ -7,7 +7,6 @@ import javax.swing.JTabbedPane;
 
 import ch.hearc.meteo.imp.afficheur.real.data.Station;
 import ch.hearc.meteo.imp.afficheur.real.vue.central.JLabelTabTitle;
-import ch.hearc.meteo.imp.afficheur.real.vue.central.JPanelConfig;
 
 public class JFrameCentrale extends JFrame
 	{
@@ -51,13 +50,6 @@ public class JFrameCentrale extends JFrame
 		tabbedPane.add(panel);
 		tabbedPane.setTabComponentAt(tabbedPane.indexOfComponent(panel), new JLabelTabTitle(tabbedPane, panel, station));
 		}
-
-	private void addPanelToTabbedPan(String title, final JPanel panel)
-		{
-		tabbedPane.add(panel);
-		tabbedPane.setTabComponentAt(tabbedPane.indexOfComponent(panel), new JLabelTabTitle(tabbedPane, panel, title));
-		}
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
@@ -65,8 +57,6 @@ public class JFrameCentrale extends JFrame
 	private void geometry()
 		{
 		tabbedPane = new JTabbedPane();
-		addPanelToTabbedPan("Config", new JPanelConfig());
-		add(tabbedPane);
 		}
 
 	private void control()

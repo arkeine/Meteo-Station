@@ -24,7 +24,7 @@ public class ImprovedAfficheurServiceSimulateur implements ImproveAfficheurServi
 		//Holder de données
 		afficheurServiceMOO = new AfficheurServiceMOO(affichageOptions, meteoServiceRemote);
 
-		//Fenètre
+		//Fen�tre
 		jFrameAfficheurService = new JFrameAfficheurService(afficheurServiceMOO);
 		}
 

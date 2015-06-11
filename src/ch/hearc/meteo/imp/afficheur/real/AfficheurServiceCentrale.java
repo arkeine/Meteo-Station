@@ -1,7 +1,6 @@
 
 package ch.hearc.meteo.imp.afficheur.real;
 
-
 import ch.hearc.meteo.imp.afficheur.real.data.Station;
 import ch.hearc.meteo.imp.afficheur.real.vue.JFrameCentrale;
 import ch.hearc.meteo.imp.afficheur.real.vue.station.JPanelStation;
@@ -37,19 +36,22 @@ public class AfficheurServiceCentrale implements AfficheurService_I
 	\*------------------------------------------------------------------*/
 
 	//++ refresh dans les 3
-	@Override public void printAltitude(MeteoEvent event)
+	@Override
+	public void printAltitude(MeteoEvent event)
 		{
 		station.printAltitude(event);
 		jpanelStation.update();
 		}
 
-	@Override public void printTemperature(MeteoEvent event)
+	@Override
+	public void printTemperature(MeteoEvent event)
 		{
 		station.printTemperature(event);
 		jpanelStation.update();
 		}
 
-	@Override public void printPression(MeteoEvent event)
+	@Override
+	public void printPression(MeteoEvent event)
 		{
 		station.printPression(event);
 		jpanelStation.update();
@@ -59,7 +61,8 @@ public class AfficheurServiceCentrale implements AfficheurService_I
 	|*				Set				*|
 	\*------------------------------*/
 
-	@Override public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
+	@Override
+	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
 		{
 		jpanelStation.updateMeteoServiceOptions(meteoServiceOptions);
 		}

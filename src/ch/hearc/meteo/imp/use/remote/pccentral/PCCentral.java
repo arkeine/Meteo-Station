@@ -7,6 +7,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.server.RMISocketFactory;
 
+import ch.hearc.meteo.imp.afficheur.real.vue.JFrameCentrale;
 import ch.hearc.meteo.imp.reseau.RemoteAfficheurCreatorFactory;
 import ch.hearc.meteo.imp.use.remote.PC_I;
 import ch.hearc.meteo.imp.use.remote.PropertiesManager;
@@ -67,6 +68,10 @@ public class PCCentral implements PC_I
 					return new ServerSocket(port);
 					}
 			});
+
+		//Creation de la fenetre vide
+		JFrameCentrale.getInstance();
+
 
 		//Creation du gestionnaire de connexion
 		new RemoteAfficheurCreatorFactory().create();

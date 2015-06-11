@@ -9,7 +9,7 @@ import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
 
-import ch.hearc.meteo.imp.afficheur.simulateur.ImprovedAfficheurSimulateurFactory;
+import ch.hearc.meteo.imp.afficheur.real.AfficheurServiceFactory;
 import ch.hearc.meteo.imp.use.remote.PropertiesManager;
 import ch.hearc.meteo.spec.afficheur.AffichageOptions;
 import ch.hearc.meteo.spec.afficheur.AfficheurFactory_I;
@@ -142,7 +142,7 @@ public class RemoteAfficheurCreator implements RemoteAfficheurCreator_I
 
 	private AfficheurService_I createAfficheurService(AffichageOptions affichageOptions, MeteoServiceWrapper_I meteoServiceRemote)
 		{
-		AfficheurFactory_I factory = new ImprovedAfficheurSimulateurFactory(); //Factory avec les spec avancé
+		AfficheurFactory_I factory = new AfficheurServiceFactory();
 		//AfficheurFactory_I factory = new AfficheurSimulateurFactory(); //Factory des spec de base
 		return factory.createOnCentralPC(affichageOptions, meteoServiceRemote);
 		}

@@ -6,10 +6,6 @@ import java.net.UnknownHostException;
 
 import ch.hearc.meteo.imp.use.remote.PropertiesManager;
 
-
-
-
-
 public class UsePCCentral
 	{
 
@@ -48,4 +44,3 @@ public class UsePCCentral
 	\*------------------------------------------------------------------*/
 
 	}
-

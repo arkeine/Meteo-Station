@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -29,13 +30,10 @@ public class JPanelGraph extends JPanel
 
 	public JPanelGraph(String title, String unit, Color color)
 		{
-		this.title = title;
-		this.labelY = unit;
-
 		serie = new TimeSeries(title);
-		serie.setMaximumItemAge(10);	//Sur 10 secondes
+		serie.setMaximumItemAge(10); //Sur 10 secondes
 		dataset = new TimeSeriesCollection();
-		currentChart = ChartFactory.createTimeSeriesChart(title, labelX, labelY, dataset, showLegend, createTooltip, createURL);
+		currentChart = ChartFactory.createTimeSeriesChart(title, labelX, unit, dataset, showLegend, createTooltip, createURL);
 		XYPlot plot = currentChart.getXYPlot();
 		XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer)plot.getRenderer();
 		renderer.setSeriesShapesVisible(0, true);
@@ -96,17 +94,22 @@ public class JPanelGraph extends JPanel
 
 	private void fill()
 		{
-
-		//		MeteoEvent meteoEvent = listMeteoEvent.get(listMeteoEvent.size() - 1);
-		for(MeteoEvent meteoEvent:listMeteoEvent)
+		Runnable updateData = new Runnable()
 			{
-			Date date = new Date(meteoEvent.getTime());
-			serie.addOrUpdate(new Second(date), meteoEvent.getValue());
-			}
-		dataset.addSeries(serie);
-		panelChart.revalidate();
-		panelChart.repaint();
-
+				public void run()
+					{
+					//		MeteoEvent meteoEvent = listMeteoEvent.get(listMeteoEvent.size() - 1);
+					for(MeteoEvent meteoEvent:listMeteoEvent)
+						{
+						Date date = new Date(meteoEvent.getTime());
+						serie.addOrUpdate(new Second(date), meteoEvent.getValue());
+						}
+					dataset.addSeries(serie);
+					panelChart.revalidate();
+					panelChart.repaint();
+					}
+			};
+		SwingUtilities.invokeLater(updateData);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -122,9 +125,7 @@ public class JPanelGraph extends JPanel
 	private TimeSeries serie;
 	private TimeSeriesCollection dataset;
 
-	private String title;
-	private String labelX = "temps";
-	private String labelY;
+	private String labelX = "Secondes";
 	private boolean showLegend = false;
 	private boolean createURL = false;
 	private boolean createTooltip = false;
