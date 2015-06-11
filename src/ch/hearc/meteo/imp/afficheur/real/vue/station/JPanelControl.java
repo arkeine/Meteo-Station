@@ -34,8 +34,8 @@ public class JPanelControl extends JPanelMain_A
 	@Override
 	public void setStation(Station station)
 		{
-		super.setStation(station);//== this.station = station;
-//		panelSlider.setStation(station);
+//		super.setStation(station);//== this.station = station;
+		this.station = station;
 		this.meteoServiceRemote = station.getMeteoServiceRemote();
 
 		setServiceControl();

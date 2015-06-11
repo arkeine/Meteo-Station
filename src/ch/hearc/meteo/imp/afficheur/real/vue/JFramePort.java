@@ -105,7 +105,7 @@ public class JFramePort extends JDialog
 
     private void appearance()
         {
-        setSize(600, 400);
+        setSize(200, 300);
         setLocationRelativeTo(parent);
         setModal(true);
         }
