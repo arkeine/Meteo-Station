@@ -28,9 +28,9 @@ public class JPanelData extends JPanelMain_A
 		{
 		super.setStation(station);
 
-		pannelPression.setStationEvent(station.getStatPression(), station.getListPression());
-		pannelAltitude.setStationEvent(station.getStatAltitude(), station.getListAltitude());
-		pannelTemperature.setStationEvent(station.getStatTemperature(), station.getListTemperature());
+		pannelPression.setStationEvent(station, station.getStatPression(), station.getListPression());
+		pannelAltitude.setStationEvent(station, station.getStatAltitude(), station.getListAltitude());
+		pannelTemperature.setStationEvent(station, station.getStatTemperature(), station.getListTemperature());
 		}
 
 	public void update()
@@ -55,8 +55,8 @@ public class JPanelData extends JPanelMain_A
 		{
 		// JComponent : Instanciation
 		pannelPression = new JPanelEvent("Pression", "Hectopascal", Color.GREEN);
-		pannelAltitude = new JPanelEvent("Altitude", "mètres", Color.BLUE);
-		pannelTemperature = new JPanelEvent("Température", "degrés", Color.RED);
+		pannelAltitude = new JPanelEvent("Altitude", "Mètres", Color.BLUE);
+		pannelTemperature = new JPanelEvent("Température", "Degrés", Color.RED);
 
 			// Layout : Specification
 			{
@@ -89,5 +89,4 @@ public class JPanelData extends JPanelMain_A
 	private JPanelEvent pannelPression;
 	private JPanelEvent pannelAltitude;
 	private JPanelEvent pannelTemperature;
-
 	}

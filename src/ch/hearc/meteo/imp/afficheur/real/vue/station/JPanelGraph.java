@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -94,10 +93,10 @@ public class JPanelGraph extends JPanel
 
 	private void fill()
 		{
-		Runnable updateData = new Runnable()
-			{
-				public void run()
-					{
+//		Runnable updateData = new Runnable()
+//			{
+//				public void run()
+//					{
 					//		MeteoEvent meteoEvent = listMeteoEvent.get(listMeteoEvent.size() - 1);
 					for(MeteoEvent meteoEvent:listMeteoEvent)
 						{
@@ -107,9 +106,9 @@ public class JPanelGraph extends JPanel
 					dataset.addSeries(serie);
 					panelChart.revalidate();
 					panelChart.repaint();
-					}
-			};
-		SwingUtilities.invokeLater(updateData);
+//					}
+//			};
+//		SwingUtilities.invokeLater(updateData);
 		}
 
 	/*------------------------------------------------------------------*\
