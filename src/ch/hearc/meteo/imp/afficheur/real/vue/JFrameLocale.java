@@ -10,11 +10,11 @@ public class JFrameLocale extends JFrame
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JFrameLocale()
+	public JFrameLocale(String title)
 		{
 		geometry();
 		control();
-		apparence();
+		apparence(title);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -35,9 +35,9 @@ public class JFrameLocale extends JFrame
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		}
 
-	private void apparence()
+	private void apparence(String title)
 		{
-		setTitle("Station Météo");
+		setTitle(title);
 		setSize(500, 550);
 		//setResizable(true);
 		}

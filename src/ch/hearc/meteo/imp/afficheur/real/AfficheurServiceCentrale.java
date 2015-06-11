@@ -29,6 +29,9 @@ public class AfficheurServiceCentrale implements AfficheurService_I
 		//Fenêtre
 		JFrameCentrale jframe = JFrameCentrale.getInstance();
 		jframe.addStationToTabbedPan(station, jpanelStation);
+//		jframe.validate();
+		jframe.repaint();
+//		System.out.println("Adding local");
 		}
 
 	/*------------------------------------------------------------------*\

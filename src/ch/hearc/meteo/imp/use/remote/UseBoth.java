@@ -4,8 +4,6 @@ package ch.hearc.meteo.imp.use.remote;
 import ch.hearc.meteo.imp.use.remote.pccentral.UsePCCentral;
 import ch.hearc.meteo.imp.use.remote.pclocal.UsePCLocal;
 
-
-
 public class UseBoth
 	{
 	/*------------------------------------------------------------------*\
@@ -27,8 +25,6 @@ public class UseBoth
 			}
 		System.out.println("ARGS error");
 		}
-
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/

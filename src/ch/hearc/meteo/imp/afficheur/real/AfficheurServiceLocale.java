@@ -35,7 +35,7 @@ public class AfficheurServiceLocale implements AfficheurService_I//eventuellemen
 		jpanel.setStation(station);
 
 		//Fenêtre
-		JFrameLocale jframe = new JFrameLocale();
+		JFrameLocale jframe = new JFrameLocale(station.getTitre());
 		jframe.add(jpanel);
 		jframe.setVisible(true);
 		}

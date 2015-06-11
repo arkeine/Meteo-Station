@@ -56,6 +56,7 @@ public class UsePCLocal
 		else
 			{
 			JOptionPane.showMessageDialog(null, "Aucune station à charger!\nFin du programme.", "Erreur", JOptionPane.WARNING_MESSAGE);
+			System.exit(0);
 			}
 
 		}
