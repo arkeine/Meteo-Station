@@ -120,10 +120,9 @@ public abstract class MeteoService_A implements MeteoService_I ,MeteoServiceCall
 
 	@Override synchronized public void stop()
 		{
-		System.out.println("MeteoService_A : Stop");
-
 		if (isRunning)
 			{
+			System.out.println("MeteoService_A : Stop");
 			isRunning = false;
 			questionneur.stopAsync();
 			stopHardware();

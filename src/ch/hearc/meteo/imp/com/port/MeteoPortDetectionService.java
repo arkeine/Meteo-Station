@@ -49,40 +49,34 @@ public class MeteoPortDetectionService implements MeteoPortDetectionService_I {
 			return false;
 		}
 
-		MeteoService meteoService = (MeteoService) ( new MeteoServiceFactory()
+		MeteoService meteoService = (MeteoService) (new MeteoServiceFactory()
 				.create(portName));
 		meteoService.addMeteoListener(new MeteoAdapter() {
 
 			@Override
 			public void altitudePerformed(MeteoEvent event) {
 				System.out.println("message alttitude");
-				System.out.println(System.currentTimeMillis());
 				data_recieved = true;
 			}
 		});
 
 		data_recieved = false;
-		
+
 		try {
 			System.out.println("Port : " + portName
 					+ " test is Station Meteo Available");
 			meteoService.connect();
-//			meteoService.start(new MeteoServiceOptions(500, 10000, 10000));
 			meteoService.startHardware();
 			meteoService.askAltitudeAsync();
+			meteoService.askAltitudeAsync();
 			Thread.sleep(timeoutMS);
-			
 
-			meteoService.stopHardware();
-			
 			meteoService.disconnect();
-			//return data_recieved;
-			
+
 		} catch (Exception e) {
 			// for debug
 			System.out.println(e.getMessage() + " => "
 					+ e.getCause().toString());
-			//return data_recieved;
 		}
 		return data_recieved;
 	}
@@ -101,7 +95,7 @@ public class MeteoPortDetectionService implements MeteoPortDetectionService_I {
 		List<String> listPortComMeteoAvailable = new ArrayList<String>();
 		// Step4
 		for (String portName : listPortCom) {
-			if (isStationMeteoAvailable(portName, 1000)) {
+			if (isStationMeteoAvailable(portName, 500)) {
 				listPortComMeteoAvailable.add(portName);
 			}
 		}

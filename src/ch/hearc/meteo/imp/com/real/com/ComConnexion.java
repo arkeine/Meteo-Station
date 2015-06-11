@@ -88,10 +88,8 @@ public class ComConnexion implements ComConnexions_I {
 
 				@Override
 				public void serialEvent(SerialPortEvent event) {
-					switch (event.getEventType()) {
-					case SerialPortEvent.DATA_AVAILABLE:
+					if (event.getEventType()== SerialPortEvent.DATA_AVAILABLE) {
 						treatData();
-						break;
 					}
 				}
 			});
@@ -110,7 +108,7 @@ public class ComConnexion implements ComConnexions_I {
 	@Override
 	public void connect() throws Exception {
 		portId = CommPortIdentifier
-				.getPortIdentifier(portName);
+				.getPortIdentifier(portName);		
 
 		serialPort = (SerialPort) portId.open(this.getClass().getSimpleName(),
 				10000);
