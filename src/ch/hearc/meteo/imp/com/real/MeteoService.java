@@ -1,9 +1,7 @@
 package ch.hearc.meteo.imp.com.real;
 
 import ch.hearc.meteo.imp.com.logique.MeteoService_A;
-import ch.hearc.meteo.imp.com.logique.Questionneur;
 import ch.hearc.meteo.imp.com.real.com.ComConnexions_I;
-import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.exception.MeteoServiceException;
 
 /**
@@ -124,12 +122,12 @@ public class MeteoService extends MeteoService_A {
 	}
 	
 	@Override
-	protected void startHardware() {
+	public void startHardware() {
 		comConnexion.start();	
 	}
 
 	@Override
-	protected void stopHardware() {
+	public void stopHardware() {
 		comConnexion.stop();
 	}
 

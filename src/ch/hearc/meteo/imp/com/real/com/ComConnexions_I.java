@@ -2,7 +2,6 @@
 package ch.hearc.meteo.imp.com.real.com;
 
 import ch.hearc.meteo.imp.com.logique.MeteoServiceCallback_I;
-import ch.hearc.meteo.spec.com.meteo.MeteoService_I;
 
 /**
  * Le cosntructeur de ComConnexions doit avoir comme paramètre d'entrée un MeteoServiceCallback_I

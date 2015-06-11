@@ -1,9 +1,16 @@
 
 package ch.hearc.meteo.imp.use.remote.pclocal;
 
+<<<<<<< HEAD
 import java.io.IOException;
 
 import ch.hearc.meteo.imp.use.remote.PropertiesManager;
+=======
+import ch.hearc.meteo.imp.afficheur.real.vue.JFramePort;
+import ch.hearc.meteo.imp.afficheur.real.vue.config.JPanelPort;
+import ch.hearc.meteo.imp.com.port.MeteoPortDetectionService;
+import ch.hearc.meteo.spec.afficheur.AffichageOptions;
+>>>>>>> b187bd439dc9b131519589bb5b8a59a1b32f4d17
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 
 public class UsePCLocal
@@ -37,10 +44,19 @@ public class UsePCLocal
 			System.exit(-1);
 			}
 
-		String portName = "COM1";
-		MeteoServiceOptions meteoServiceOptions = new MeteoServiceOptions(800, 1000, 1200);
+		JPanelPort panelPort = new JPanelPort(new MeteoPortDetectionService());
+		JFramePort framePort = new JFramePort(panelPort);
+		framePort.setVisible(true);
+		String portName = panelPort.getPortCom();
 
-		new PCLocal(meteoServiceOptions, portName).run();
+		if (portName != null && framePort.isOkeyPressed())
+			{
+			MeteoServiceOptions meteoServiceOptions = new MeteoServiceOptions(800, 1000, 1200);
+
+			new PCLocal(meteoServiceOptions, portName).run();
+			local.run();
+			}
+
 		}
 
 

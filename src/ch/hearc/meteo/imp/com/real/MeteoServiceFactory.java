@@ -4,7 +4,6 @@ import ch.hearc.meteo.imp.com.logique.MeteoServiceCallback_I;
 import ch.hearc.meteo.imp.com.real.com.ComConnexion;
 import ch.hearc.meteo.imp.com.real.com.ComConnexions_I;
 import ch.hearc.meteo.imp.com.real.com.ComOption;
-import ch.hearc.meteo.imp.com.simulateur.MeteoServiceSimulateur;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceFactory_I;
 import ch.hearc.meteo.spec.com.meteo.MeteoService_I;
 

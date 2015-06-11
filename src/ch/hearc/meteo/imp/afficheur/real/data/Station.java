@@ -175,7 +175,7 @@ public class Station
 
 	private static void afficherConsole(List<MeteoEvent> listMeteoEvent, String titre)
 		{
-		System.out.print("[AfficheurServiceMOO] : " + titre + " : ");
+		System.out.print("[" + Station.class.getSimpleName() + "] : " + titre + " : ");
 		for(MeteoEvent meteoEvent:listMeteoEvent)
 			{
 			System.out.print(meteoEvent.getValue() + " ");

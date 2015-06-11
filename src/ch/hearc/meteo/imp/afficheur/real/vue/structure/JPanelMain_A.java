@@ -1,22 +1,19 @@
 
-package ch.hearc.meteo.imp.afficheur.real.vue.panel;
+package ch.hearc.meteo.imp.afficheur.real.vue.structure;
 
 import javax.swing.JPanel;
 
 import ch.hearc.meteo.imp.afficheur.real.data.Station;
 
-public abstract class JPanelMain extends JPanel
+public abstract class JPanelMain_A extends JPanel
 	{
-
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelMain(Station station)
+	public JPanelMain_A()
 		{
-		this.station = station;
-
 		init();
 		geometry();
 		control();
@@ -24,18 +21,18 @@ public abstract class JPanelMain extends JPanel
 		}
 
 	protected abstract void init();
-	protected abstract void apparence();
-	protected abstract void control();
 	protected abstract void geometry();
+	protected abstract void control();
+	protected abstract void apparence();
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	/*------------------------------------------------------------------*\
-	|*							Methodes Private						*|
-	\*------------------------------------------------------------------*/
-
+	public void setStation(Station station)//peut etre pas necessaire pour certains panels
+		{
+		this.station = station;
+		}
 
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|

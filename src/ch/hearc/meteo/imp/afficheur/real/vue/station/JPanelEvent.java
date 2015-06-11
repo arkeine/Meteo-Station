@@ -1,16 +1,15 @@
 
-package ch.hearc.meteo.imp.afficheur.real.vue.infostat;
+package ch.hearc.meteo.imp.afficheur.real.vue.station;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.JPanel;
 
 import ch.hearc.meteo.imp.afficheur.real.data.Stat;
-import ch.hearc.meteo.imp.afficheur.simulateur.vue.atome.BoxSerieTemporelle;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
 
 public class JPanelEvent extends JPanel
@@ -20,24 +19,26 @@ public class JPanelEvent extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelEvent(Stat stat, List<MeteoEvent> listMeteoEvent, String titre)
+	public JPanelEvent(String title, String unit, Color color)
 		{
-		this.stat = stat;
-		this.listMeteoEvent = listMeteoEvent;
-		this.titre = titre;
-
-		geometry();
+		geometry(title, unit, color);
 		control();
-		apparence();
+		apparence(title);
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
+	public void setStationEvent(Stat stat, List<MeteoEvent> listMeteoEvent)
+		{
+		panelGraph.setListMeteoEvent(listMeteoEvent);
+		panelStat.setState(stat);
+		}
+
 	public void update()
 		{
-		boxSerieTemnporelle.update();
+		panelGraph.update();
 		panelStat.update();
 		}
 
@@ -45,34 +46,28 @@ public class JPanelEvent extends JPanel
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
-	private void geometry()
+	private void geometry(String title, String unit, Color color)
 		{
-		panelStat = new JPanelStat(stat);
-		boxSerieTemnporelle = new BoxSerieTemporelle(listMeteoEvent);
+		// JComponent : Instanciation
+		panelStat = new JPanelStat();
+		panelGraph = new JPanelGraph(title, unit, color);
 
 		panelStat.setMaximumSize(new Dimension(180, 100));
-		boxSerieTemnporelle.setMaximumSize(new Dimension(250, 100));
+		panelGraph.setMaximumSize(new Dimension(250, 100));
 
-		Box boxH = Box.createHorizontalBox();
-		boxH.add(Box.createHorizontalStrut(15));
-		boxH.add(panelStat);
-		boxH.add(Box.createHorizontalStrut(15));
-		boxH.add(boxSerieTemnporelle);
-		boxH.add(Box.createHorizontalStrut(15));
+			// Layout : Specification
+			{
+			setLayout(new BorderLayout());
+			}
 
-		Box boxV = Box.createVerticalBox();
-		boxV.add(Box.createVerticalStrut(15));
-		boxV.add(boxH);
-		boxV.add(Box.createVerticalStrut(15));
-
-		setLayout(new BorderLayout());
-		add(boxV, BorderLayout.CENTER);
-		setBorder(BorderFactory.createTitledBorder(titre));
+		// JComponent : add
+		add(panelGraph, BorderLayout.CENTER);
+		add(panelStat, BorderLayout.WEST);
 		}
 
-	private void apparence()
+	private void apparence(String title)
 		{
-		// rien
+		setBorder(BorderFactory.createTitledBorder(title));
 		}
 
 	private void control()
@@ -84,14 +79,8 @@ public class JPanelEvent extends JPanel
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 
-	// Inputs
-	private Stat stat;
-
-	private List<MeteoEvent> listMeteoEvent;
-	private String titre;
-
 	// Tools
 	private JPanelStat panelStat;
-	private BoxSerieTemporelle boxSerieTemnporelle;
+	private JPanelGraph panelGraph;
 
 	}

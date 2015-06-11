@@ -48,9 +48,9 @@ public abstract class MeteoService_A implements MeteoService_I ,MeteoServiceCall
 
 	protected abstract void disconnectHardware() throws MeteoServiceException;
 	
-	protected abstract void startHardware();
+	public abstract void startHardware();
 	
-	protected abstract void stopHardware();
+	public abstract void stopHardware();
 
 
 	/*------------------------------------------------------------------*\
@@ -120,15 +120,12 @@ public abstract class MeteoService_A implements MeteoService_I ,MeteoServiceCall
 
 	@Override synchronized public void stop()
 		{
-		System.out.println("MeteoService_A : Stop");
-
 		if (isRunning)
 			{
+			System.out.println("MeteoService_A : Stop");
 			isRunning = false;
-			questionneur.stopAsync(); // pas suffisant
-			
+			questionneur.stopAsync();
 			stopHardware();
-
 			//v1
 //			while(threadQuestionnaire.isAlive())
 //				{
@@ -147,7 +144,8 @@ public abstract class MeteoService_A implements MeteoService_I ,MeteoServiceCall
 			// V2
 			//thread.stop(); // vu la nature du thread, pas genant comme méthode
 
-			//v3 ou pool thread avec 1 thread
+			//v3 pool thread avec 1 thread
+			//utilisé actuellement
 			
 			}
 		}
