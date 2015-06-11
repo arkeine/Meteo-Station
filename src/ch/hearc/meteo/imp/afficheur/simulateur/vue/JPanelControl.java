@@ -145,6 +145,7 @@ public class JPanelControl extends JPanel
 
 	private void updateEtatBouton() throws RemoteException
 		{
+		this.meteoServiceRemote = afficheurServiceMOO.getMeteoServiceRemote();
 		if (meteoServiceRemote.isRunning())
 			{
 			enableStop();
