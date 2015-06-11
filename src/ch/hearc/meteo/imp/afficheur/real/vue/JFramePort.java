@@ -1,54 +1,136 @@
+
 package ch.hearc.meteo.imp.afficheur.real.vue;
 
-import javax.swing.JFrame;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import ch.hearc.meteo.imp.afficheur.real.vue.panel.JPanelPort;
-import ch.hearc.meteo.imp.com.port.MeteoPortDetectionService;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
 
-public class JFramePort extends JFrame {
+public class JFramePort extends JDialog
+    {
 
-	/*------------------------------------------------------------------*\
-	|*							Constructeurs							*|
-	\*------------------------------------------------------------------*/
+    /*------------------------------------------------------------------*\
+    |*                            Constructeurs                            *|
+    \*------------------------------------------------------------------*/
 
-	public JFramePort() {
-		geometry();
-		control();
-		apparence();
-	}
+    public JFramePort(Component component, Component parent)
+        {
+        this.component = component;
+        this.parent = parent;
+        geometry();
+        control();
+        appearance();
+        }
 
-	/*------------------------------------------------------------------*\
-	|*							Methodes Public							*|
-	\*------------------------------------------------------------------*/
+    public JFramePort(Component component)
+        {
+        this(component, null);
+        }
 
-	/*------------------------------------------------------------------*\
-	|*							Methodes Private						*|
-	\*------------------------------------------------------------------*/
+    /*------------------------------------------------------------------*\
+    |*                            Methodes Public                            *|
+    \*------------------------------------------------------------------*/
 
-	private void geometry() {
-		add(new JPanelPort(new MeteoPortDetectionService()));
-	}
+    /*------------------------------*\
+    |*                Set                *|
+    \*------------------------------*/
 
-	private void control() {
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-	}
+    /*------------------------------*\
+    |*                Get                *|
+    \*------------------------------*/
 
-	private void apparence() {
-		setTitle("Select a port to start a MeteoStation");
-		// frame.setMinimumSize(new Dimension(200,300));
-		// frame.setPreferredSize(new Dimension(200,300));
-		setSize(200, 300);
-		setLocationRelativeTo(null);
-		setResizable(false);
-		setVisible(true);
-	}
+    public boolean isOkeyPressed()
+        {
+        return closeState;
+        }
 
-	/*------------------------------------------------------------------*\
-	|*							Attributs Private						*|
-	\*------------------------------------------------------------------*/
+    public boolean isCancelPressed()
+        {
+        return !closeState;
+        }
 
-	// Inputs
+    public Component getComponent()
+        {
+        return this.component;
+        }
 
-	// Tools
+    /*------------------------------------------------------------------*\
+    |*                            Methodes Private                       *|
+    \*------------------------------------------------------------------*/
 
-}
+    private void geometry()
+        {
+        // JComponent : Instanciation
+        buttonOk = new JButton("ok");
+        buttonCancel = new JButton("cancel");
+
+            // Layout : Specification
+            {
+            BorderLayout borderLayout = new BorderLayout();
+            setLayout(borderLayout);
+            }
+
+            {
+            JPanel panelButton = new JPanel();
+            panelButton.setLayout(new FlowLayout());
+
+            panelButton.add(buttonOk);
+            panelButton.add(buttonCancel);
+
+            add(panelButton, BorderLayout.SOUTH);
+            }
+
+        if (component != null)
+            {
+            add(component, BorderLayout.CENTER);
+            }
+        }
+
+    private void control()
+        {
+        buttonOk.addActionListener(new ActionListener()
+            {
+
+                @Override
+                public void actionPerformed(ActionEvent e)
+                    {
+                    closeState = true;
+                    dispose();
+                    }
+            });
+        buttonCancel.addActionListener(new ActionListener()
+            {
+
+                @Override
+                public void actionPerformed(ActionEvent e)
+                    {
+                    closeState = false;
+                    dispose();
+                    }
+            });
+        }
+
+    private void appearance()
+        {
+        setSize(600, 400);
+        setLocationRelativeTo(parent);
+        setModal(true);
+        }
+
+    /*------------------------------------------------------------------*\
+    |*                            Attributs Private                        *|
+    \*------------------------------------------------------------------*/
+
+    // Tools
+    private Component component;
+    private Component parent;
+    private JButton buttonOk;
+    private JButton buttonCancel;
+    private boolean closeState;
+
+    }

@@ -1,11 +1,6 @@
 
 package ch.hearc.meteo.imp.afficheur.real;
 
-
-import java.util.List;
-
-import javax.swing.JMenu;
-
 import ch.hearc.meteo.imp.afficheur.real.data.Station;
 import ch.hearc.meteo.imp.afficheur.real.vue.JFrameLocale;
 import ch.hearc.meteo.imp.afficheur.real.vue.station.JPanelStation;
@@ -26,7 +21,15 @@ public class AfficheurServiceLocale implements AfficheurService_I//eventuellemen
 		{
 		//Holder de données
 		this.station = new Station(affichageOptions, meteoServiceRemote);
+		showNewStation();
+		}
 
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public void showNewStation()
+		{
 		//Afficheur de données
 		jpanel = new JPanelStation();
 		jpanel.setStation(station);
@@ -37,34 +40,22 @@ public class AfficheurServiceLocale implements AfficheurService_I//eventuellemen
 		jframe.setVisible(true);
 		}
 
-	/*------------------------------------------------------------------*\
-	|*							Methodes Public							*|
-	\*------------------------------------------------------------------*/
-
-	public void setPortsCom(List<String> portsCom)
-	{
-//		jframe.setMenuConfig(portsCom);
-	}
-
-	public JMenu getRemoteInterfaceSelecter()
-	{
-		return null;
-		//jframe.getmenuportscom
-	}
-
-	@Override public void printAltitude(MeteoEvent event)
+	@Override
+	public void printAltitude(MeteoEvent event)
 		{
 		station.printAltitude(event);
 		jpanel.update();
 		}
 
-	@Override public void printTemperature(MeteoEvent event)
+	@Override
+	public void printTemperature(MeteoEvent event)
 		{
 		station.printTemperature(event);
 		jpanel.update();
 		}
 
-	@Override public void printPression(MeteoEvent event)
+	@Override
+	public void printPression(MeteoEvent event)
 		{
 		station.printPression(event);
 		jpanel.update();
@@ -74,7 +65,8 @@ public class AfficheurServiceLocale implements AfficheurService_I//eventuellemen
 	|*				Set				*|
 	\*------------------------------*/
 
-	@Override public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
+	@Override
+	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
 		{
 		jpanel.updateMeteoServiceOptions(meteoServiceOptions);
 		}

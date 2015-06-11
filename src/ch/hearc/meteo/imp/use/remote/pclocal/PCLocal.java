@@ -4,8 +4,8 @@ package ch.hearc.meteo.imp.use.remote.pclocal;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-import ch.hearc.meteo.imp.afficheur.simulateur.AfficheurSimulateurFactory;
-import ch.hearc.meteo.imp.com.simulateur.MeteoServiceSimulatorFactory;
+import ch.hearc.meteo.imp.afficheur.real.AfficheurServiceFactory;
+import ch.hearc.meteo.imp.com.real.MeteoServiceFactory;
 import ch.hearc.meteo.imp.reseau.RemoteAfficheurCreator;
 import ch.hearc.meteo.imp.use.remote.PC_I;
 import ch.hearc.meteo.spec.afficheur.AffichageOptions;
@@ -85,14 +85,14 @@ public class PCLocal implements PC_I
 	private void client() throws RemoteException, MeteoServiceException, NotBoundException
 		{
 		//Creation du service d'acces à la station météo
-		MeteoService_I meteoService = (new MeteoServiceSimulatorFactory()).create(portCom);
+		MeteoService_I meteoService = (new MeteoServiceFactory()).create(portCom);
 		meteoService.connect();
 		meteoService.start(meteoServiceOptions);
 		MeteoServiceWrapper meteoServiceWrapper = new MeteoServiceWrapper(meteoService);
 
 		//Creation du service d'affichage local
 		AffichageOptions affichageOptionLocal = new AffichageOptions(3, "PC local");
-		final AfficheurService_I afficheurServiceLocal = (new AfficheurSimulateurFactory()).createOnLocalPC(affichageOptionLocal, meteoServiceWrapper);
+		final AfficheurService_I afficheurServiceLocal = (new AfficheurServiceFactory()).createOnLocalPC(affichageOptionLocal, meteoServiceWrapper);
 		meteoService.addMeteoListener(new MeteoListener_I()
 			{
 

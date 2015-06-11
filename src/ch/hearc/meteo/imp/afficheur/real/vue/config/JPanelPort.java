@@ -1,10 +1,9 @@
-package ch.hearc.meteo.imp.afficheur.real.vue.panel;
+package ch.hearc.meteo.imp.afficheur.real.vue.config;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -41,6 +40,11 @@ public class JPanelPort extends JPanel {
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
+	public String getPortCom()
+	{
+		return listPort.getSelectedValue();
+	}
+
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
@@ -63,13 +67,11 @@ public class JPanelPort extends JPanel {
 		renderer.setHorizontalAlignment(SwingConstants.CENTER);
 
 		refreshButton = new JButton("UPDATE");
-		startButton = new JButton("START");
 
 		this.add(listPort, BorderLayout.CENTER);
 
 		JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		controlPanel.add(refreshButton);
-		controlPanel.add(startButton);
 
 		this.add(controlPanel, BorderLayout.SOUTH);
 
@@ -93,15 +95,6 @@ public class JPanelPort extends JPanel {
 			}
 
 		});
-
-		startButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JPanelPort.this.start();
-			}
-
-		});
 	}
 
 	private void refreshList() {
@@ -109,18 +102,20 @@ public class JPanelPort extends JPanel {
 		List<String> listPortMeteo = mpds.findListPortMeteo();
 
 		for (String s : listPortMeteo)
-			defListModel.addElement(s);
+			{
+				defListModel.addElement(s);
+				}
 
 	}
 
 	private void start() {
 		if (!listPort.isSelectionEmpty()) {
-			String portName = listPort.getSelectedValue();
+			final String portName = listPort.getSelectedValue();
 
 			// startMeteoService et affichage
 			System.out.println(portName);
 			new Thread(new Runnable() {
-				
+
 				@Override
 				public void run() {
 					MeteoService_I meteoService = (new MeteoServiceFactory())
@@ -130,10 +125,10 @@ public class JPanelPort extends JPanel {
 					} catch (MeteoServiceException e) {
 						e.printStackTrace();
 					}
-					
+
 				}
 			}).start();
-			
+
 
 			// réactualiser la liste des ports disponibles
 //			refreshList();
@@ -152,7 +147,6 @@ public class JPanelPort extends JPanel {
 	// Tools
 	private JList<String> listPort;
 	private JButton refreshButton;
-	private JButton startButton;
 
 	DefaultListModel<String> defListModel;
 }
