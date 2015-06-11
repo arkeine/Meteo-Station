@@ -40,8 +40,6 @@ public class JPanelGraph extends JPanel
 		XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer)plot.getRenderer();
 		renderer.setSeriesShapesVisible(0, true);
 		renderer.setSeriesPaint(0, color);
-//		renderer.setseries
-		//		dataset.
 
 		geometry();
 		control();
@@ -55,13 +53,10 @@ public class JPanelGraph extends JPanel
 	public void setListMeteoEvent(List<MeteoEvent> listMeteoEvent)
 		{
 		this.listMeteoEvent = listMeteoEvent;
-
-		//		update();
 		}
 
 	public void update()
 		{
-		empty();
 		fill();
 
 		validate();
@@ -95,18 +90,6 @@ public class JPanelGraph extends JPanel
 		// rien
 		}
 
-	//	private void refreshChart()
-	//		{
-	//		panelChart.removeAll();
-	//		panelChart.revalidate(); // This removes the old chart
-	//		aChart = createChart();
-	//		aChart.removeLegend();
-	//		ChartPanel chartPanel = new ChartPanel(aChart);
-	//		panelChart.setLayout(new BorderLayout());
-	//		panelChart.add(chartPanel);
-	//		panelChart.repaint(); // This method makes the new chart appear
-	//		}
-
 	/*------------------------------*\
 	|*			  geometry			*|
 	\*------------------------------*/
@@ -121,21 +104,9 @@ public class JPanelGraph extends JPanel
 			serie.addOrUpdate(new Second(date), meteoEvent.getValue());
 			}
 		dataset.addSeries(serie);
-//		panelChart.revalidate();
+		panelChart.revalidate();
 		panelChart.repaint();
 
-		//		((TimeSeriesCollection)dataset).addSeries(serie);
-
-		//		currentChart = ChartFactory.createTimeSeriesChart(title, labelX, labelY, dataset, showLegend, createTooltip, createURL);
-		//		panelChart.setChart(currentChart);
-		}
-
-	private void empty()
-		{
-		//		for(Component compo:this.getComponents())
-		//			{
-		//			this.remove(compo);
-		//			}
 		}
 
 	/*------------------------------------------------------------------*\

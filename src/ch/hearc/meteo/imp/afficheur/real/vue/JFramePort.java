@@ -66,8 +66,7 @@ public class JFramePort extends JDialog
     private void geometry()
         {
         // JComponent : Instanciation
-        buttonOk = new JButton("ok");
-        buttonCancel = new JButton("cancel");
+        buttonStart = new JButton("Start");
 
             // Layout : Specification
             {
@@ -79,8 +78,7 @@ public class JFramePort extends JDialog
             JPanel panelButton = new JPanel();
             panelButton.setLayout(new FlowLayout());
 
-            panelButton.add(buttonOk);
-            panelButton.add(buttonCancel);
+            panelButton.add(buttonStart);
 
             add(panelButton, BorderLayout.SOUTH);
             }
@@ -93,23 +91,13 @@ public class JFramePort extends JDialog
 
     private void control()
         {
-        buttonOk.addActionListener(new ActionListener()
+        buttonStart.addActionListener(new ActionListener()
             {
 
                 @Override
                 public void actionPerformed(ActionEvent e)
                     {
                     closeState = true;
-                    dispose();
-                    }
-            });
-        buttonCancel.addActionListener(new ActionListener()
-            {
-
-                @Override
-                public void actionPerformed(ActionEvent e)
-                    {
-                    closeState = false;
                     dispose();
                     }
             });
@@ -129,8 +117,7 @@ public class JFramePort extends JDialog
     // Tools
     private Component component;
     private Component parent;
-    private JButton buttonOk;
-    private JButton buttonCancel;
+    private JButton buttonStart;
     private boolean closeState;
 
     }
