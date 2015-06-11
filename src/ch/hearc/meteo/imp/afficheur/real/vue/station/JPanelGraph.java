@@ -55,8 +55,7 @@ public class JPanelGraph extends JPanel
 	public void update()
 		{
 		fill();
-
-		validate();
+//		validate();
 		}
 
 	/*------------------------------------------------------------------*\
@@ -93,22 +92,13 @@ public class JPanelGraph extends JPanel
 
 	private void fill()
 		{
-//		Runnable updateData = new Runnable()
-//			{
-//				public void run()
-//					{
-					//		MeteoEvent meteoEvent = listMeteoEvent.get(listMeteoEvent.size() - 1);
-					for(MeteoEvent meteoEvent:listMeteoEvent)
-						{
-						Date date = new Date(meteoEvent.getTime());
-						serie.addOrUpdate(new Second(date), meteoEvent.getValue());
-						}
-					dataset.addSeries(serie);
-					panelChart.revalidate();
-					panelChart.repaint();
-//					}
-//			};
-//		SwingUtilities.invokeLater(updateData);
+		//final TimeSeries serie = new TimeSeries("XXX");
+		for(MeteoEvent meteoEvent:listMeteoEvent)
+			{
+			Date date = new Date(meteoEvent.getTime());
+			serie.addOrUpdate(new Second(date), meteoEvent.getValue());
+			}
+		dataset.addSeries(serie);
 		}
 
 	/*------------------------------------------------------------------*\
