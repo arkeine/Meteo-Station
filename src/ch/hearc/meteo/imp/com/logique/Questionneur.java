@@ -85,12 +85,8 @@ public class Questionneur implements Runnable
 				// update
 				timeToWaitMS = min(questionnable.getMeteoServiceOptions().getDelayMS(), timeManagerAltitude.getDt().getDt(), timeManagerPression.getDt().getDt(), timeManagerTemperature.getDt().getDt());
 
-//				System.out.println("[Questionneur] : sleeping "+ timeToWaitMS+ " (ms) from thread : "+Thread.currentThread().getName());
-//				sleep(timeToWaitMS);
-				
-				//test debug
-				System.out.println("[Questionneur] : sleeping "+ 5000  + " (ms) from thread : "+Thread.currentThread().getName());
-				sleep(5000);
+				System.out.println("[Questionneur] : sleeping "+ timeToWaitMS+ " (ms) from thread : "+Thread.currentThread().getName());
+				sleep(timeToWaitMS);
 				}
 			}
 		}
