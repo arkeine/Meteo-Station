@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="ext/BilatRmiTools.jar"/>
+	<classpathentry exported="true" kind="lib" path="ext/BilatRmiTools.jar" sourcepath="ext/BilatRmiTools-doc.jar"/>
 	<classpathentry exported="true" kind="lib" path="ext/jcommon-1.0.23.jar"/>
 	<classpathentry exported="true" kind="lib" path="ext/jfreechart-1.0.19.jar"/>
 	<classpathentry exported="true" kind="lib" path="ext/junit-4.11.jar"/>

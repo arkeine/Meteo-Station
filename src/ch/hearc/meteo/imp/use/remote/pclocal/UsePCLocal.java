@@ -1,7 +1,9 @@
 
 package ch.hearc.meteo.imp.use.remote.pclocal;
 
-import ch.hearc.meteo.spec.afficheur.AffichageOptions;
+import java.io.IOException;
+
+import ch.hearc.meteo.imp.use.remote.PropertiesManager;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 
 public class UsePCLocal
@@ -13,21 +15,42 @@ public class UsePCLocal
 
 	public static void main(String[] args)
 		{
-		main();
+		try
+			{
+			main();
+			}
+		catch (IOException e)
+			{
+			e.printStackTrace();
+			}
 		}
 
-	public static void main()
+	public static void main() throws IOException
 		{
+		try
+			{
+			PropertiesManager.getInstance();
+			}
+		catch (IOException e)
+			{
+			e.printStackTrace();
+			System.exit(-1);
+			}
+
 		String portName = "COM1";
 		MeteoServiceOptions meteoServiceOptions = new MeteoServiceOptions(800, 1000, 1200);
-		AffichageOptions affichageOption = new AffichageOptions(3,  "OPTION");
 
-		PCLocal local = new PCLocal(meteoServiceOptions, portName, affichageOption, null);
-		local.run();
+		new PCLocal(meteoServiceOptions, portName).run();
 		}
+
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+
+	/*------------------------------------------------------------------*\
+	|*							Atribut Private						*|
 	\*------------------------------------------------------------------*/
 
 	}
