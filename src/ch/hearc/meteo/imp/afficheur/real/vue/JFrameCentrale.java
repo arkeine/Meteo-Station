@@ -2,7 +2,12 @@
 package ch.hearc.meteo.imp.afficheur.real.vue;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
+import ch.hearc.meteo.imp.afficheur.real.data.Station;
+import ch.hearc.meteo.imp.afficheur.real.vue.central.JLabelTabTitle;
+import ch.hearc.meteo.imp.afficheur.real.vue.central.JPanelConfig;
 
 public class JFrameCentrale extends JFrame
 	{
@@ -41,9 +46,17 @@ public class JFrameCentrale extends JFrame
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	/*------------------------------*\
-	|*				Set				*|
-	\*------------------------------*/
+	public void addStationToTabbedPan(Station station, final JPanel panel)
+		{
+		tabbedPane.add(panel);
+		tabbedPane.setTabComponentAt(tabbedPane.indexOfComponent(panel), new JLabelTabTitle(tabbedPane, panel, station));
+		}
+
+	private void addPanelToTabbedPan(String title, final JPanel panel)
+		{
+		tabbedPane.add(panel);
+		tabbedPane.setTabComponentAt(tabbedPane.indexOfComponent(panel), new JLabelTabTitle(tabbedPane, panel, title));
+		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
@@ -51,7 +64,9 @@ public class JFrameCentrale extends JFrame
 
 	private void geometry()
 		{
-		//TODO
+		tabbedPane = new JTabbedPane();
+		addPanelToTabbedPan("Config", new JPanelConfig());
+		add(tabbedPane);
 		}
 
 	private void control()
@@ -64,7 +79,8 @@ public class JFrameCentrale extends JFrame
 		setTitle("Station Météo");
 
 		setSize(500, 550);
-		setResizable(false);
+		setResizable(true);
+		setVisible(true);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -72,6 +88,7 @@ public class JFrameCentrale extends JFrame
 	\*------------------------------------------------------------------*/
 
 	// Tools
+	private int nbStation;
 	private static boolean isInstanced;
 	private static JFrameCentrale jframeCentrale;
 	private JTabbedPane tabbedPane;

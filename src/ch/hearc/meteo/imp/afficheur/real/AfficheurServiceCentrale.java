@@ -11,10 +11,8 @@ import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
-public class AfficheurServiceCentrale implements AfficheurService_I//eventuellement dans Datacontrolleur
+public class AfficheurServiceCentrale implements AfficheurService_I
 	{
-
-	//TODO : modifier la classe car c'est une copie de afficheurservicestation
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
@@ -26,12 +24,12 @@ public class AfficheurServiceCentrale implements AfficheurService_I//eventuellem
 		Station station = new Station(affichageOptions, meteoServiceRemote);
 
 		//Afficheur de données
-		jpanel = new JPanelStation();
-		jpanel.setStation(station);
+		jpanelStation = new JPanelStation();
+		jpanelStation.setStation(station);
 
 		//Fenêtre
 		JFrameCentrale jframe = JFrameCentrale.getInstance();
-		jframe.add(jpanel);
+		jframe.addStationToTabbedPan(station, jpanelStation);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -42,19 +40,19 @@ public class AfficheurServiceCentrale implements AfficheurService_I//eventuellem
 	@Override public void printAltitude(MeteoEvent event)
 		{
 		station.printAltitude(event);
-		jpanel.update();
+		jpanelStation.update();
 		}
 
 	@Override public void printTemperature(MeteoEvent event)
 		{
 		station.printTemperature(event);
-		jpanel.update();
+		jpanelStation.update();
 		}
 
 	@Override public void printPression(MeteoEvent event)
 		{
 		station.printPression(event);
-		jpanel.update();
+		jpanelStation.update();
 		}
 
 	/*------------------------------*\
@@ -63,7 +61,7 @@ public class AfficheurServiceCentrale implements AfficheurService_I//eventuellem
 
 	@Override public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
 		{
-		jpanel.updateMeteoServiceOptions(meteoServiceOptions);
+		jpanelStation.updateMeteoServiceOptions(meteoServiceOptions);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -76,6 +74,6 @@ public class AfficheurServiceCentrale implements AfficheurService_I//eventuellem
 
 	// Tools
 	private Station station;
-	private JPanelStation jpanel;
+	private JPanelStation jpanelStation;
 
 	}

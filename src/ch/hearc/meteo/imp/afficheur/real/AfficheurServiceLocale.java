@@ -2,6 +2,10 @@
 package ch.hearc.meteo.imp.afficheur.real;
 
 
+import java.util.List;
+
+import javax.swing.JMenu;
+
 import ch.hearc.meteo.imp.afficheur.real.data.Station;
 import ch.hearc.meteo.imp.afficheur.real.vue.JFrameLocale;
 import ch.hearc.meteo.imp.afficheur.real.vue.station.JPanelStation;
@@ -36,6 +40,17 @@ public class AfficheurServiceLocale implements AfficheurService_I//eventuellemen
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
+
+	public void setPortsCom(List<String> portsCom)
+	{
+//		jframe.setMenuConfig(portsCom);
+	}
+
+	public JMenu getRemoteInterfaceSelecter()
+	{
+		return null;
+		//jframe.getmenuportscom
+	}
 
 	@Override public void printAltitude(MeteoEvent event)
 		{

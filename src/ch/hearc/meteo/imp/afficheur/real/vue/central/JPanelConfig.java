@@ -1,9 +1,8 @@
 
-package ch.hearc.meteo.imp.afficheur.real.vue.config;
+package ch.hearc.meteo.imp.afficheur.real.vue.central;
 
 import java.awt.BorderLayout;
 
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JList;
 
@@ -39,18 +38,12 @@ public class JPanelConfig extends JPanelMain_A
 		buttonShow = new JButton("Afficher");
 
 			{
-			BorderLayout borderLayout = new BorderLayout(0, 0);
+			BorderLayout borderLayout = new BorderLayout();
 			setLayout(borderLayout);
-			add(listPortsCom, BorderLayout.CENTER);
-
-			Box boxLayout = Box.createHorizontalBox();
-			boxLayout.add(buttonRefresh);
-			boxLayout.add(buttonShow);
-
-			add(boxLayout, BorderLayout.SOUTH);
 			}
 
-		add(listPortsCom);
+
+		add(listPortsCom, BorderLayout.CENTER);
 		}
 
 	@Override

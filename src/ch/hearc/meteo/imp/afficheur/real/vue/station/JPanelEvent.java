@@ -2,6 +2,7 @@
 package ch.hearc.meteo.imp.afficheur.real.vue.station;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
 
@@ -18,13 +19,11 @@ public class JPanelEvent extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelEvent(String titre)
+	public JPanelEvent(String title, String unit, Color color)
 		{
-		this.titre = titre;
-
-		geometry();
+		geometry(title, unit, color);
 		control();
-		apparence();
+		apparence(title);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -47,11 +46,11 @@ public class JPanelEvent extends JPanel
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
-	private void geometry()
+	private void geometry(String title, String unit, Color color)
 		{
 		// JComponent : Instanciation
 		panelStat = new JPanelStat();
-		panelGraph = new JPanelGraph(titre);//listMeteoEvent);
+		panelGraph = new JPanelGraph(title, unit, color);
 
 		panelStat.setMaximumSize(new Dimension(180, 100));
 		panelGraph.setMaximumSize(new Dimension(250, 100));
@@ -66,9 +65,9 @@ public class JPanelEvent extends JPanel
 		add(panelStat, BorderLayout.WEST);
 		}
 
-	private void apparence()
+	private void apparence(String title)
 		{
-		setBorder(BorderFactory.createTitledBorder(titre));
+		setBorder(BorderFactory.createTitledBorder(title));
 		}
 
 	private void control()
@@ -79,9 +78,6 @@ public class JPanelEvent extends JPanel
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
-
-	// Inputs
-	private String titre;
 
 	// Tools
 	private JPanelStat panelStat;

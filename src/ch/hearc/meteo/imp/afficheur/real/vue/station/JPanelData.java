@@ -1,6 +1,7 @@
 
 package ch.hearc.meteo.imp.afficheur.real.vue.station;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 
 import ch.hearc.meteo.imp.afficheur.real.data.Station;
@@ -53,14 +54,13 @@ public class JPanelData extends JPanelMain_A
 	protected void geometry()
 		{
 		// JComponent : Instanciation
-		pannelPression = new JPanelEvent("Pression");
-		pannelAltitude = new JPanelEvent("Altitude");
-		pannelTemperature = new JPanelEvent("Temperature");
+		pannelPression = new JPanelEvent("Pression", "Hectopascal", Color.GREEN);
+		pannelAltitude = new JPanelEvent("Altitude", "mètres", Color.BLUE);
+		pannelTemperature = new JPanelEvent("Température", "degrés", Color.RED);
 
 			// Layout : Specification
 			{
 			setLayout(new GridLayout(3, 0));
-//			setBackground(Color.BLACK);
 			}
 
 		// JComponent : add
