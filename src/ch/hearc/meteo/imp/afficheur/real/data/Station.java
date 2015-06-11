@@ -8,7 +8,6 @@ import java.util.List;
 import ch.hearc.meteo.spec.afficheur.AffichageOptions;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEvent;
-import ch.hearc.meteo.spec.com.meteo.listener.event.MeteoEventType_E;
 import ch.hearc.meteo.spec.reseau.rmiwrapper.MeteoServiceWrapper_I;
 
 public class Station
@@ -48,7 +47,7 @@ public class Station
 			manage(listAltitude, event);
 			statAltitude.update(event.getValue());
 
-			afficherConsole(listAltitude, MeteoEventType_E.ALTITUDE.name() + ESPACE + affichageOptions.getTitre());
+//			afficherConsole(listAltitude, MeteoEventType_E.ALTITUDE.name() + ESPACE + affichageOptions.getTitre());
 			}
 		}
 
@@ -59,7 +58,7 @@ public class Station
 			manage(listPression, event);
 			statPression.update(event.getValue());
 
-			afficherConsole(listPression, MeteoEventType_E.PRESSION.name() + ESPACE + affichageOptions.getTitre());
+//			afficherConsole(listPression, MeteoEventType_E.PRESSION.name() + ESPACE + affichageOptions.getTitre());
 			}
 		}
 
@@ -70,7 +69,7 @@ public class Station
 			manage(listTemperature, event);
 			statTemperature.update(event.getValue());
 
-			afficherConsole(listTemperature, MeteoEventType_E.TEMPERATURE.name() + ESPACE + affichageOptions.getTitre());
+//			afficherConsole(listTemperature, MeteoEventType_E.TEMPERATURE.name() + ESPACE + affichageOptions.getTitre());
 			}
 		}
 
