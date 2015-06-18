@@ -2,12 +2,14 @@
 package ch.hearc.meteo.imp.afficheur.real.vue.station;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import ch.hearc.meteo.imp.afficheur.real.data.Station;
 import ch.hearc.meteo.imp.afficheur.real.vue.structure.JPanelRoot_A;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 
-public class JPanelStation extends JPanelRoot_A//JPanelMain implements JPanelRoot_I
+public class JPanelStation extends JPanelRoot_A implements ActionListener
 	{
 
 	/*------------------------------------------------------------------*\
@@ -40,7 +42,13 @@ public class JPanelStation extends JPanelRoot_A//JPanelMain implements JPanelRoo
 	@Override
 	public void updateMeteoServiceOptions(MeteoServiceOptions meteoServiceOptions)
 		{
-//		panelControl.updateMeteoServiceOptions(meteoServiceOptions);
+		//Rien
+		}
+
+	@Override
+	public void actionPerformed(ActionEvent e)
+		{
+		panelData.actionPerformed(e);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -73,8 +81,7 @@ public class JPanelStation extends JPanelRoot_A//JPanelMain implements JPanelRoo
 	@Override
 	protected void apparence()
 		{
-		// rien
-		//setBackground(Color.ORANGE);
+
 		}
 
 	@Override
@@ -90,6 +97,5 @@ public class JPanelStation extends JPanelRoot_A//JPanelMain implements JPanelRoo
 	// Tools
 	private JPanelData panelData;
 	private JPanelControl panelControl;//Mettre slider dans control
-
 
 	}

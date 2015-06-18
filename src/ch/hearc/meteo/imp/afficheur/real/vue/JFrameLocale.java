@@ -2,6 +2,12 @@
 package ch.hearc.meteo.imp.afficheur.real.vue;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+import ch.hearc.meteo.imp.afficheur.real.data.Station;
+import ch.hearc.meteo.imp.afficheur.real.vue.station.JPanelStation;
 
 public class JFrameLocale extends JFrame
 	{
@@ -10,16 +16,23 @@ public class JFrameLocale extends JFrame
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JFrameLocale(String title)
+	public JFrameLocale(Station station)
 		{
+		this.station = station;
+
 		geometry();
 		control();
-		apparence(title);
+		apparence();
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
+
+	public JPanelStation getPanelStation()
+		{
+		return panelStation;
+		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
@@ -27,7 +40,19 @@ public class JFrameLocale extends JFrame
 
 	private void geometry()
 		{
-		//Rien
+		panelStation = new JPanelStation();
+		panelStation.setStation(station);
+		add(panelStation);
+
+		JMenuBar menuBar = new JMenuBar();
+		menuWindow = new JMenu("Window");
+
+		addWindowVisibleMenuItem("Show Altitude");
+		addWindowVisibleMenuItem("Show Pression");
+		addWindowVisibleMenuItem("Show Température");
+
+		menuBar.add(menuWindow);
+		setJMenuBar(menuBar);
 		}
 
 	private void control()
@@ -35,11 +60,17 @@ public class JFrameLocale extends JFrame
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		}
 
-	private void apparence(String title)
+	private void apparence()
 		{
-		setTitle(title);
+		setTitle(station.getTitre());
 		setSize(500, 550);
-		//setResizable(true);
+		}
+
+	public void addWindowVisibleMenuItem(String title)
+		{
+		JMenuItem menuItem = new JMenuItem(title);
+		menuItem.addActionListener(panelStation);
+		menuWindow.add(menuItem);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -47,4 +78,7 @@ public class JFrameLocale extends JFrame
 	\*------------------------------------------------------------------*/
 
 	// Tools
+	JPanelStation panelStation;
+	Station station;
+	JMenu menuWindow;
 	}
