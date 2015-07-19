@@ -30,10 +30,11 @@ public class JPanelGraph extends JPanel
 	public JPanelGraph(String title, String unit, Color color)
 		{
 		serie = new TimeSeries(title);
-		serie.setMaximumItemAge(10); //Sur 10 secondes
 		dataset = new TimeSeriesCollection();
-		currentChart = ChartFactory.createTimeSeriesChart(title, labelX, unit, dataset, showLegend, createTooltip, createURL);
+		dataset.addSeries(serie);
+		currentChart = ChartFactory.createTimeSeriesChart("", labelX, unit, dataset, showLegend, createTooltip, createURL);
 		XYPlot plot = currentChart.getXYPlot();
+		plot.setDomainPannable(true);
 		XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer)plot.getRenderer();
 		renderer.setSeriesShapesVisible(0, true);
 		renderer.setSeriesPaint(0, color);
@@ -66,6 +67,7 @@ public class JPanelGraph extends JPanel
 		{
 		// JComponent : Instanciation
 		panelChart = new ChartPanel(currentChart);
+		panelChart.setMouseWheelEnabled(true);
 
 			// Layout : Specification
 			{
@@ -98,7 +100,7 @@ public class JPanelGraph extends JPanel
 			Date date = new Date(meteoEvent.getTime());
 			serie.addOrUpdate(new Second(date), meteoEvent.getValue());
 			}
-		dataset.addSeries(serie);
+//		dataset.addSeries(serie);
 		}
 
 	/*------------------------------------------------------------------*\

@@ -2,9 +2,11 @@
 package ch.hearc.meteo.imp.afficheur.real.vue.station;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridLayout;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -18,8 +20,10 @@ public class JPanelStat extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelStat()
+	public JPanelStat(Color color)
 		{
+		this.color = color;
+
 		geometry();
 		control();
 		apparence();
@@ -37,9 +41,9 @@ public class JPanelStat extends JPanel
 	public void update()
 		{
 		labelAverageTen.setText("" + MathTools.arrondir(stat.getAverageTen()));
-		labelAverage.setText("moy " + MathTools.arrondir(stat.getAverage()));
-		labelMinimum.setText("min " + MathTools.arrondir(stat.getMinimum()));
-		labelMaximum.setText("max " + MathTools.arrondir(stat.getMaximum()));
+		labelAverage.setText("<html>Moyenne :<br>" + MathTools.arrondir(stat.getAverage()));
+		labelMinimum.setText("<html>Minimum :<br>" + MathTools.arrondir(stat.getMinimum()));
+		labelMaximum.setText("<html>Maximum :<br>" + MathTools.arrondir(stat.getMaximum()));
 		}
 
 	/*------------------------------------------------------------------*\
@@ -49,31 +53,34 @@ public class JPanelStat extends JPanel
 	private void geometry()
 		{
 		// JComponent : Instanciation
-		labelAverageTen = new JLabel("-----");
-		labelAverage = new JLabel("moy ------");
-		labelMinimum = new JLabel("min ------");
-		labelMaximum = new JLabel("max ------");
+		labelTitleAverageTen = new JLabel("<html><b>Actuelle</b></html>");
+		labelAverageTen = new JLabel(defaultValue);
+
+		labelAverage = new JLabel("Moyenne :\n" + defaultValue);
+		labelMinimum = new JLabel("Minimum :\n" + defaultValue);
+		labelMaximum = new JLabel("Maximum :\n" + defaultValue);
 
 		JPanel panelCenter = new JPanel();
-		//panelControl
-		//panelVariation
 		JPanel panelMainInfo = new JPanel();
 		JPanel panelSecondaryInfos = new JPanel();
+
 
 			// Layout : Specification
 			{
 			setLayout(new BorderLayout());
-			panelCenter.setLayout(new BorderLayout());
+			panelCenter.setLayout(new BorderLayout(10, 0));
 			panelMainInfo.setLayout(new BorderLayout());
-			panelSecondaryInfos.setLayout(new GridLayout(3, 0));
+			panelSecondaryInfos.setLayout(new BoxLayout(panelSecondaryInfos, BoxLayout.Y_AXIS));
 			}
 
 		// JComponent : add
-		panelMainInfo.add(new JLabel("Moyenne progressive"), BorderLayout.NORTH);
+		panelMainInfo.add(labelTitleAverageTen, BorderLayout.NORTH);
 		panelMainInfo.add(labelAverageTen, BorderLayout.CENTER);
 
 		panelSecondaryInfos.add(labelAverage);
+		panelSecondaryInfos.add(Box.createVerticalStrut(10));
 		panelSecondaryInfos.add(labelMaximum);
+		panelSecondaryInfos.add(Box.createVerticalStrut(10));
 		panelSecondaryInfos.add(labelMinimum);
 
 		panelCenter.add(panelMainInfo, BorderLayout.CENTER);
@@ -84,9 +91,11 @@ public class JPanelStat extends JPanel
 
 	private void apparence()
 		{
-		labelAverageTen.setFont(new Font("courier", Font.BOLD, 25));
-		//		labelCurrent.setForeground(Color.RED);
-		//		setBorder(BorderFactory.createTitledBorder("Statistique"));
+		biggerFont = new Font(getFont().getFontName(), Font.BOLD, 30);
+//		labelTitleAverageTen.setFont(biggerFont.deriveFont((float)10.0));
+
+		labelAverageTen.setFont(biggerFont);
+		labelAverageTen.setForeground(color);
 		}
 
 	private void control()
@@ -100,11 +109,16 @@ public class JPanelStat extends JPanel
 
 	// Inputs
 	private Stat stat;
+	private Color color;
 
 	// Tools
+	private JLabel labelTitleAverageTen;
 	private JLabel labelAverageTen;
 	private JLabel labelMinimum;
 	private JLabel labelMaximum;
 	private JLabel labelAverage;
+
+	private Font biggerFont;
+	private final String defaultValue = "N/A";
 
 	}

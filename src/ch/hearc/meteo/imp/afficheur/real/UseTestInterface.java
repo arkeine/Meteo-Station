@@ -25,6 +25,7 @@ public class UseTestInterface
 		{
 		try
 			{
+			//On demarre le programme de toute facon
 			main();
 			}
 		catch (MeteoServiceException e)

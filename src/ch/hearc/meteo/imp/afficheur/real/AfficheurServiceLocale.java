@@ -30,13 +30,10 @@ public class AfficheurServiceLocale implements AfficheurService_I//eventuellemen
 
 	public void showNewStation()
 		{
-		//Afficheur de données
-		jpanel = new JPanelStation();
-		jpanel.setStation(station);
-
 		//Fenêtre
-		JFrameLocale jframe = new JFrameLocale(station.getTitre());
-		jframe.add(jpanel);
+		JFrameLocale jframe = new JFrameLocale(station);
+		jpanel = jframe.getPanelStation();
+		jframe.pack();
 		jframe.setVisible(true);
 		}
 

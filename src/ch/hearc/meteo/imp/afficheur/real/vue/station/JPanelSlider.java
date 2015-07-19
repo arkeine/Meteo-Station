@@ -2,13 +2,13 @@
 package ch.hearc.meteo.imp.afficheur.real.vue.station;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.rmi.RemoteException;
 
-import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -27,6 +27,7 @@ public class JPanelSlider extends JPanel
 		this.title = title;
 
 		geometry(minValue, maxValue);
+		control();
 		apparence();
 		}
 
@@ -44,7 +45,7 @@ public class JPanelSlider extends JPanel
 		{
 		int value = (int)meteoServiceOptions.getTemperatureDT();
 		jslider.setValue(value);
-		setTitleBorder(value);
+		setTitleValue(value);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -58,20 +59,20 @@ public class JPanelSlider extends JPanel
 		int defaultValue = 1000;
 
 		jslider = new JSlider(min, max, defaultValue);
-
-		border = BorderFactory.createTitledBorder("");
-		setTitleBorder(defaultValue);
-		jslider.setBorder(border);
+		labelSlider = new JLabel();
+		setTitleValue(defaultValue);
 
 		setLayout(new BorderLayout());
 
+		add(labelSlider, BorderLayout.NORTH);
 		add(jslider, BorderLayout.CENTER);
 		}
 
 	protected void apparence()
 		{
-		//setBackground(Color.ORANGE);
-		jslider.setOrientation(SwingConstants.HORIZONTAL);
+		jslider.setMinimumSize(new Dimension(0, 0));
+		setMinimumSize(new Dimension(0, 0));
+		jslider.setOrientation(SwingConstants.VERTICAL);
 		}
 
 	protected void control()
@@ -104,7 +105,7 @@ public class JPanelSlider extends JPanel
 							System.out.println("No dt Setter");
 							}
 
-						setTitleBorder(value);
+						setTitleValue(value);
 						station.setMeteoServiceOptions(meteoServiceOption);
 						}
 					catch (RemoteException e1)
@@ -117,9 +118,9 @@ public class JPanelSlider extends JPanel
 			});
 		}
 
-	private void setTitleBorder(int value)
+	private void setTitleValue(int value)
 		{
-		border.setTitle("dt " + title + " =" + value + " (ms)");
+		labelSlider.setText("dt = " + value + " (ms)");
 		}
 
 	/*------------------------------------------------------------------*\
@@ -134,6 +135,6 @@ public class JPanelSlider extends JPanel
 	private int max;
 
 	private JSlider jslider;
-	private TitledBorder border;
+	private JLabel labelSlider;
 
 	}

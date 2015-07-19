@@ -1,6 +1,9 @@
 
 package ch.hearc.meteo.imp.afficheur.real;
 
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+
 import ch.hearc.meteo.spec.afficheur.AffichageOptions;
 import ch.hearc.meteo.spec.afficheur.AfficheurFactory_I;
 import ch.hearc.meteo.spec.afficheur.AfficheurService_I;
@@ -18,7 +21,22 @@ public class AfficheurServiceFactory implements AfficheurFactory_I
 
 	public AfficheurServiceFactory()
 		{
-		// rien
+		//Changement de graphisme
+		try
+			{
+			for(LookAndFeelInfo info:UIManager.getInstalledLookAndFeels())
+				{
+				if ("Nimbus".equals(info.getName()))
+					{
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+					}
+				}
+			}
+		catch (Exception e)
+			{
+			e.printStackTrace();
+			}
 		}
 
 	/*------------------------------------------------------------------*\
