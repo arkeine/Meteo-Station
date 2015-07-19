@@ -3,11 +3,6 @@ package ch.hearc.meteo.imp.use.remote.pclocal;
 
 import java.io.IOException;
 
-import javax.swing.JOptionPane;
-
-import ch.hearc.meteo.imp.afficheur.real.vue.JFramePort;
-import ch.hearc.meteo.imp.afficheur.real.vue.config.JPanelPort;
-import ch.hearc.meteo.imp.com.port.MeteoPortDetectionService;
 import ch.hearc.meteo.imp.use.remote.PropertiesManager;
 import ch.hearc.meteo.spec.com.meteo.MeteoServiceOptions;
 
@@ -42,22 +37,28 @@ public class UsePCLocal
 			System.exit(-1);
 			}
 
-		JPanelPort panelPort = new JPanelPort(new MeteoPortDetectionService());
-		JFramePort framePort = new JFramePort(panelPort);
-		framePort.setVisible(true);
-		String portName = panelPort.getPortCom();
+//		JPanelPort panelPort = new JPanelPort(new MeteoPortDetectionService());
+//		JFramePort framePort = new JFramePort(panelPort);
+//		framePort.setVisible(true);
+//		String portName = panelPort.getPortCom();
+//
+//
+//		if (portName != null && framePort.isOkeyPressed())
+//			{
+//			MeteoServiceOptions meteoServiceOptions = new MeteoServiceOptions(800, 1000, 1200);
+//
+//			new PCLocal(meteoServiceOptions, portName).run();
+//			}
+//		else
+//			{
+//			JOptionPane.showMessageDialog(null, "Aucune station ï¿½ charger!\nFin du programme.", "Erreur", JOptionPane.WARNING_MESSAGE);
+//			System.exit(0);
+//			}
 
-		if (portName != null && framePort.isOkeyPressed())
-			{
-			MeteoServiceOptions meteoServiceOptions = new MeteoServiceOptions(800, 1000, 1200);
 
-			new PCLocal(meteoServiceOptions, portName).run();
-			}
-		else
-			{
-			JOptionPane.showMessageDialog(null, "Aucune station à charger!\nFin du programme.", "Erreur", JOptionPane.WARNING_MESSAGE);
-			System.exit(0);
-			}
+		String portName = "COM1";
+		MeteoServiceOptions meteoServiceOptions = new MeteoServiceOptions(800, 1000, 1200);
+		new PCLocal(meteoServiceOptions, portName).run();
 
 		}
 

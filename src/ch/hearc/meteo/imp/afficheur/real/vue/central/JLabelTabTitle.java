@@ -5,7 +5,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.rmi.RemoteException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -36,15 +35,15 @@ public class JLabelTabTitle extends JPanel
 				@Override
 				public void mouseClicked(MouseEvent e)
 					{
-					try
-						{
-						tabbedPane.remove(panel);
-						station.getMeteoServiceRemote().stop();
-						}
-					catch (RemoteException e1)
-						{
-						e1.printStackTrace();
-						}
+					tabbedPane.remove(panel);
+//					try
+//						{
+//						station.getMeteoServiceRemote().stop();
+//						}
+//					catch (RemoteException e1)
+//						{
+//						e1.printStackTrace();
+//						}
 					}
 			});
 

@@ -10,8 +10,8 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 
-import ch.hearc.meteo.imp.afficheur.real.AfficheurServiceFactory;
-import ch.hearc.meteo.imp.com.real.MeteoServiceFactory;
+import ch.hearc.meteo.imp.afficheur.simulateur.AfficheurSimulateurFactory;
+import ch.hearc.meteo.imp.com.simulateur.MeteoServiceSimulatorFactory;
 import ch.hearc.meteo.imp.reseau.RemoteAfficheurCreator;
 import ch.hearc.meteo.imp.use.remote.PC_I;
 import ch.hearc.meteo.imp.use.remote.PropertiesManager;
@@ -117,15 +117,15 @@ public class PCLocal implements PC_I
 
 	private void client() throws MeteoServiceException, NotBoundException, IOException
 		{
-		meteoService = (new MeteoServiceFactory()).create(portCom);
+		meteoService = new MeteoServiceSimulatorFactory().create(portCom);
 		meteoService.connect();
 		meteoService.start(meteoServiceOptions);
 		MeteoServiceWrapper meteoServiceWrapper = new MeteoServiceWrapper(meteoService);
 
 		//Creation du service d'affichage local
 		AffichageOptions affichageOptionLocal = new AffichageOptions(3, "PCLocal-" + portCom);
-		afficheurServiceLocal = (new AfficheurServiceFactory()).createOnLocalPC(affichageOptionLocal, meteoServiceWrapper);
-		connectMeteoService();
+		afficheurServiceLocal = (new AfficheurSimulateurFactory()).createOnLocalPC(affichageOptionLocal, meteoServiceWrapper);
+		connectMeteoServiceLocal();
 
 		//Partage
 		InetAddress ip = InetAddress.getByName(PropertiesManager.getInstance().getIpPcLocal());
@@ -167,6 +167,7 @@ public class PCLocal implements PC_I
 									RmiURL rmiAfficheurServiceDistant = remoteAfficheurCreator.createRemoteAfficheurService(finalAffichageOptionDistant, rmiUrlMeteoService);
 
 									remoteAfficheurServicePcCentral = (AfficheurServiceWrapper_I)RmiTools.connectionRemoteObjectBloquant(rmiAfficheurServiceDistant,timeout, tryNb);
+
 									connected = true;
 									System.out.println("Passage en mode connecté");
 									}
@@ -174,7 +175,6 @@ public class PCLocal implements PC_I
 							catch (IOException e)
 								{
 								System.out.println("echec de connection");
-								e.printStackTrace();
 								}
 
 							Thread.sleep(WAIT_TIME_CONNECTION_LOST);
@@ -188,7 +188,7 @@ public class PCLocal implements PC_I
 			};
 		}
 
-	private void connectMeteoService()
+	private void connectMeteoServiceLocal()
 		{
 		meteoService.addMeteoListener(new MeteoListener_I()
 			{
@@ -263,7 +263,6 @@ public class PCLocal implements PC_I
 						}
 					}
 			});
-
 		}
 
 	private void errorLost()

@@ -2,7 +2,6 @@ package ch.hearc.meteo.imp.afficheur.simulateur.vue;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.rmi.RemoteException;
 
 import javax.swing.JFrame;
@@ -55,8 +54,10 @@ public class JFrameAfficheurService extends JFrame {
 				try {
 					afficheurServiceMOO.getMeteoServiceRemote().disconnect();
 					setVisible(false);
+					System.exit(0);
 				} catch (RemoteException | MeteoServiceException e1) {
 					e1.printStackTrace();
+					System.exit(-1);
 				}
 
 			}
